@@ -14,28 +14,29 @@
     body {
         margin: 0;
         font-family: 'Montserrat', sans-serif;
-        background: linear-gradient(135deg, #eaf2ff, #fff0f8);
+        /* Нежные, свадебные цвета */
+        background: linear-gradient(135deg, #f7f3ff, #ffeef8); /* Мягкие фиолетово-розовые тона */
         color: #333;
         text-align: center;
         overflow-x: hidden;
         position: relative;
     }
 
-    /* Анимированный звездный фон */
+    /* Анимированный звездный фон - слегка измененные цвета для гармонии */
     .stars-background {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        background: radial-gradient(ellipse at bottom, #2b2e4a 0%, #1a1a2e 100%); /* Глубокие сине-фиолетовые оттенки */
         overflow: hidden;
         z-index: -1;
     }
 
     .star {
         position: absolute;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.8); /* Чуть прозрачнее */
         border-radius: 50%;
         animation: twinkle linear infinite;
         opacity: 0;
@@ -46,12 +47,12 @@
         50% { opacity: 1; transform: scale(1); }
     }
 
-    /* Лёгкая анимация блёсток (дополнительно к звездам) */
+    /* Лёгкая анимация блёсток */
     .particle {
         position: absolute;
         width: 8px;
         height: 8px;
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.7); /* Чуть прозрачнее */
         border-radius: 50%;
         animation: fall 10s infinite ease-in;
     }
@@ -66,7 +67,7 @@
         padding: 40px 20px 60px;
         position: relative;
         font-family: 'Playfair Display', serif;
-        z-index: 1; /* Ensure header is above the background */
+        z-index: 1;
     }
 
     .language-switcher {
@@ -84,6 +85,7 @@
         cursor: pointer;
         font-weight: bold;
         transition: background .3s;
+        color: #6a5acd; /* Цвет текста кнопки */
     }
 
     .language-switcher button:hover {
@@ -91,35 +93,39 @@
     }
 
     h1 {
-        font-size: 3em;
+        font-size: 3.2em; /* Чуть крупнее */
         margin: 0;
-        color: #5a4d9d;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #6a5acd; /* Более мягкий фиолетовый */
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Более выраженная тень */
     }
 
     .countdown {
-        font-size: 1.2em;
+        font-size: 1.3em; /* Чуть крупнее */
         margin: 10px 0;
-        color: #555;
+        color: #777; /* Мягче серый */
+        font-weight: 500;
     }
 
     #date, #address {
         margin: 5px 0;
         font-style: italic;
-        color: #444;
+        color: #666; /* Мягче серый */
     }
 
     .hero-image {
         width: 100%;
-        height: 350px;
-        background: url('https://via.placeholder.com/1200x350.png?text=Hilton+Astana') center/cover no-repeat;
+        height: 400px; /* Чуть выше */
+        background: url('https://via.placeholder.com/1200x400.png?text=Hilton+Astana+-+Wedding') center/cover no-repeat;
         position: relative;
         margin-bottom: 30px;
-        filter: brightness(0.85);
-        opacity: 0; /* For scroll animation */
-        transform: translateY(20px); /* For scroll animation */
-        transition: all 0.8s ease-out; /* For scroll animation */
+        filter: brightness(0.9); /* Мягче яркость */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease-out;
         z-index: 1;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Добавим тень */
+        border-radius: 15px; /* Скруглим углы */
+        overflow: hidden; /* Обрезка для скругления */
     }
 
     .hero-image.is-visible {
@@ -133,22 +139,22 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.15); /* Мягче оверлей */
     }
 
-    /* Секции контента */
+    /* Секции контента - более компактные отступы */
     .content-section {
         background: #fff;
-        max-width: 800px; /* Wider for better content display */
-        margin: 40px auto;
-        padding: 40px;
+        max-width: 800px;
+        margin: 30px auto; /* Меньше отступы */
+        padding: 35px; /* Меньше внутренние отступы */
         border-radius: 20px;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         position: relative;
         z-index: 1;
-        opacity: 0; /* For scroll animation */
-        transform: translateY(30px); /* For scroll animation */
-        transition: all 0.8s ease-out; /* For scroll animation */
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
     }
 
     .content-section.is-visible {
@@ -158,33 +164,42 @@
 
     .content-section h2 {
         font-family: 'Playfair Display', serif;
-        color: #5a4d9d;
-        font-size: 2.2em;
-        margin-bottom: 25px;
+        color: #6a5acd; /* Мягкий фиолетовый */
+        font-size: 2.1em; /* Чуть меньше */
+        margin-bottom: 20px; /* Меньше отступ */
+        border-bottom: 2px solid #e0e0f0; /* Ненавязчивая линия */
+        padding-bottom: 10px;
+    }
+
+    .content-section p {
+        color: #555; /* Более мягкий цвет текста */
+        line-height: 1.6;
+        margin-bottom: 15px;
     }
 
     .pdf-viewer {
         width: 100%;
-        height: 500px; /* Adjust height as needed */
-        border: 1px solid #ddd;
+        height: 450px; /* Чуть меньше высота */
+        border: 1px solid #eee; /* Более светлая рамка */
         border-radius: 10px;
         overflow: hidden;
         margin-top: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Мягче тень */
     }
 
     .image-gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Чуть меньше мин. ширина */
+        gap: 12px; /* Меньше отступ */
         margin-top: 20px;
     }
 
     .image-gallery img {
         width: 100%;
-        height: 150px;
+        height: 140px; /* Чуть меньше высота */
         object-fit: cover;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border-radius: 8px; /* Меньше скругление */
+        box-shadow: 0 3px 8px rgba(0,0,0,0.08); /* Мягче тень */
         transition: transform 0.3s ease;
     }
 
@@ -192,18 +207,19 @@
         transform: scale(1.05);
     }
 
+    /* Форма - больше отступы, чтобы выделить */
     form {
         background: #fff;
-        max-width: 540px;
-        margin: -60px auto 40px; /* Adjust margin to fit content sections */
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        max-width: 580px; /* Чуть шире */
+        margin: 60px auto 60px; /* Отступы, чтобы выделить форму */
+        padding: 40px; /* Больше внутренние отступы */
+        border-radius: 25px; /* Больше скругление */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Более выраженная тень */
         position: relative;
         z-index: 1;
-        opacity: 0; /* For scroll animation */
-        transform: translateY(30px); /* For scroll animation */
-        transition: all 0.8s ease-out; /* For scroll animation */
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
     }
 
     form.is-visible {
@@ -212,64 +228,74 @@
     }
 
     form p {
-        margin: 0 0 12px;
+        margin: 0 0 15px; /* Чуть больше отступ */
         font-weight: 500;
-        color: #333;
+        color: #444; /* Чуть темнее */
+        font-size: 1.1em; /* Чуть крупнее */
     }
 
     input[type=text] {
         width: 100%;
-        padding: 12px;
-        margin-bottom: 18px;
-        border-radius: 8px;
+        padding: 14px; /* Чуть больше */
+        margin-bottom: 20px; /* Чуть больше */
+        border-radius: 10px; /* Больше скругление */
         border: 1px solid #ccc;
-        font-size: 1em;
+        font-size: 1.05em;
+        transition: border-color 0.3s;
+    }
+    input[type=text]:focus {
+        border-color: #6a5acd; /* Подсветка при фокусе */
+        outline: none;
     }
 
     .radio-group {
         display: flex;
         justify-content: center;
-        gap: 30px;
-        margin-bottom: 18px;
+        gap: 40px; /* Больше расстояние */
+        margin-bottom: 25px; /* Чуть больше отступ */
     }
 
     .radio-group label {
         display: flex;
         align-items: center;
-        gap: 8px;
-        font-size: 1em;
+        gap: 10px; /* Больше расстояние */
+        font-size: 1.05em;
         cursor: pointer;
+        color: #555;
     }
 
     .radio-group input {
-        accent-color: #5a4d9d;
-        width: 18px;
-        height: 18px;
+        accent-color: #6a5acd; /* Новый акцентный цвет */
+        width: 20px; /* Чуть больше */
+        height: 20px; /* Чуть больше */
     }
 
     input[type=submit] {
-        background-color: #5a4d9d;
+        background-color: #6a5acd; /* Новый основной цвет кнопки */
         color: #fff;
         border: none;
-        padding: 14px 26px;
-        font-size: 1.1em;
-        border-radius: 12px;
+        padding: 15px 30px; /* Чуть больше */
+        font-size: 1.15em; /* Чуть крупнее */
+        border-radius: 15px; /* Больше скругление */
         cursor: pointer;
-        transition: background .3s, transform .1s;
+        transition: background .3s, transform .1s, box-shadow 0.3s;
+        font-weight: 600;
+        letter-spacing: 0.5px;
     }
 
     input[type=submit]:hover {
-        background-color: #4a3b7a;
-        transform: translateY(-2px);
+        background-color: #5a4bba; /* Темнее при наведении */
+        transform: translateY(-3px); /* Больше смещение */
+        box-shadow: 0 8px 20px rgba(106, 90, 205, 0.4); /* Тень при наведении */
     }
 
     footer {
-        margin: 40px 0;
-        color: #777;
+        margin: 50px 0 30px; /* Увеличим отступ сверху, уменьшим снизу */
+        color: #888; /* Мягче серый */
         font-size: 0.9em;
-        opacity: 0; /* For scroll animation */
-        transform: translateY(20px); /* For scroll animation */
-        transition: all 0.8s ease-out; /* For scroll animation */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease-out;
     }
 
     footer.is-visible {
@@ -278,23 +304,12 @@
     }
 
     @media (max-width: 600px) {
-        h1 {
-            font-size: 2.4em;
-        }
-
-        form {
-            margin: -40px 20px 30px;
-            padding: 20px;
-        }
-
-        .content-section {
-            margin: 20px;
-            padding: 25px;
-        }
-
-        .pdf-viewer {
-            height: 350px;
-        }
+        h1 { font-size: 2.6em; }
+        .hero-image { height: 300px; }
+        form { margin: 40px 20px 40px; padding: 25px; }
+        .content-section { margin: 20px; padding: 25px; }
+        .pdf-viewer { height: 300px; }
+        .radio-group { flex-direction: column; gap: 15px; }
     }
 </style>
 </head>
@@ -314,14 +329,14 @@
 
     // Создание звезд для фона
     const starsBackground = document.getElementById('starsBackground');
-    for (let i = 0; i < 150; i++) { // More stars for a fuller effect
+    for (let i = 0; i < 150; i++) { // Больше звезд для полноты эффекта
         const star = document.createElement('div');
         star.className = 'star';
-        star.style.width = star.style.height = `${Math.random() * 3 + 1}px`; // Random size between 1px and 4px
+        star.style.width = star.style.height = `${Math.random() * 3 + 1}px`; // Случайный размер от 1px до 4px
         star.style.left = `${Math.random() * 100}vw`;
         star.style.top = `${Math.random() * 100}vh`;
-        star.style.animationDelay = `${Math.random() * 5}s`; // Different delays for twinkling
-        star.style.animationDuration = `${Math.random() * 3 + 2}s`; // Different durations
+        star.style.animationDelay = `${Math.random() * 5}s`; // Разные задержки для мерцания
+        star.style.animationDuration = `${Math.random() * 3 + 2}s`; // Разные продолжительности
         starsBackground.appendChild(star);
     }
 </script>
@@ -341,10 +356,33 @@
     <div class="overlay"></div>
 </div>
 
+<div class="content-section" data-animate-on-scroll>
+    <h2>Наши лучшие моменты</h2>
+    <p>Погрузитесь в наши воспоминания! Здесь вы найдете некоторые из наших самых любимых и дорогих сердцу совместных фотографий.</p>
+    <div class="pdf-viewer">
+        <iframe src="https://www.africau.edu/images/default/sample.pdf#toolbar=0" width="100%" height="100%" style="border:none;"></iframe>
+    </div>
+    <div class="image-gallery">
+        <img src="https://via.placeholder.com/200x150/f0e6fa/6a5acd?text=Момент+1" alt="Совместное фото 1">
+        <img src="https://via.placeholder.com/200x150/f0e6fa/6a5acd?text=Момент+2" alt="Совместное фото 2">
+        <img src="https://via.placeholder.com/200x150/f0e6fa/6a5acd?text=Момент+3" alt="Совместное фото 3">
+        <img src="https://via.placeholder.com/200x150/f0e6fa/6a5acd?text=Момент+4" alt="Совместное фото 4">
+    </div>
+</div>
+
+<div class="content-section" data-animate-on-scroll>
+    <h2>Место проведения</h2>
+    <p>Мы с нетерпением ждем возможности отпраздновать наш особенный день с вами в великолепном отеле Hilton Astana.</p>
+    <div class="pdf-viewer">
+        <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0" width="100%" height="100%" style="border:none;"></iframe>
+    </div>
+    <p>Отель предлагает элегантные залы, безупречный сервис и комфортабельные условия, чтобы сделать наше торжество незабываемым.</p>
+</div>
+
 <form data-animate-on-scroll>
-    <p id="confirm">Пожалуйста, подтвердите ваше присутствие:</p>
+    <p id="confirm">Пожалуйста, подтвердите ваше присутствие, чтобы мы могли позаботиться о каждой детали вашего комфорта:</p>
     <input type="text" id="input" placeholder="Введите ваши имена">
-    <p id="needHotel">Нужно ли вам проживание в отеле Hilton Astana? (спец. цена — 55 000 ₸)</p>
+    <p id="needHotel">Нужно ли вам проживание в отеле Hilton Astana? Для наших гостей доступна специальная цена — 55 000 ₸ за ночь.</p>
     <div class="radio-group">
         <label><input type="radio" name="hotel" id="yes"><span id="yesText">Да</span></label>
         <label><input type="radio" name="hotel" id="no"><span id="noText">Нет</span></label>
@@ -352,69 +390,47 @@
     <input type="submit" id="submit" value="Отправить">
 </form>
 
-<div class="content-section" data-animate-on-scroll>
-    <h2>Наши лучшие моменты</h2>
-    <p>Посмотрите некоторые из наших любимых совместных фотографий!</p>
-    <div class="pdf-viewer">
-        <iframe src="https://www.africau.edu/images/default/sample.pdf#toolbar=0" width="100%" height="100%" style="border:none;"></iframe>
-    </div>
-    <div class="image-gallery">
-        <img src="https://via.placeholder.com/200x150?text=Фото+1" alt="Совместное фото 1">
-        <img src="https://via.placeholder.com/200x150?text=Фото+2" alt="Совместное фото 2">
-        <img src="https://via.placeholder.com/200x150?text=Фото+3" alt="Совместное фото 3">
-        <img src="https://via.placeholder.com/200x150?text=Фото+4" alt="Совместное фото 4">
-    </div>
-</div>
-
-<div class="content-section" data-animate-on-scroll>
-    <h2>Место проведения</h2>
-    <p>Наше торжество пройдет в великолепном отеле Hilton Astana.</p>
-    <div class="pdf-viewer">
-        <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0" width="100%" height="100%" style="border:none;"></iframe>
-    </div>
-    <p>Отель предлагает элегантные залы и высококлассное обслуживание для вашего комфорта.</p>
-</div>
-
 <footer data-animate-on-scroll>
-    <p>© 2031 Еркежан & Бекзат</p>
+    <p>© 2031 Еркежан & Бекзат. Все права защищены.</p>
 </footer>
 
 <script>
-    // Объект для переводов (как вы уже начали)
     const translations = {
         ru: {
             title: "Свадьба Еркежан и Бекзат",
             countdownPrefix: "До свадьбы",
             countdownSuffix: "",
             eventHappened: "Событие уже состоялось!",
-            confirm: "Пожалуйста, подтвердите ваше присутствие:",
+            confirm: "Пожалуйста, подтвердите ваше присутствие, чтобы мы могли позаботиться о каждой детали вашего комфорта:",
             inputPlaceholder: "Введите ваши имена",
-            needHotel: "Нужно ли вам проживание в отеле Hilton Astana? (спец. цена — 55 000 ₸)",
+            needHotel: "Нужно ли вам проживание в отеле Hilton Astana? Для наших гостей доступна специальная цена — 55 000 ₸ за ночь.",
             yesText: "Да",
             noText: "Нет",
             submit: "Отправить",
             ourMoments: "Наши лучшие моменты",
-            ourMomentsDesc: "Посмотрите некоторые из наших любимых совместных фотографий!",
+            ourMomentsDesc: "Погрузитесь в наши воспоминания! Здесь вы найдете некоторые из наших самых любимых и дорогих сердцу совместных фотографий.",
             venue: "Место проведения",
-            venueDesc: "Наше торжество пройдет в великолепном отеле Hilton Astana.",
-            hotelInfo: "Отель предлагает элегантные залы и высококлассное обслуживание для вашего комфорта."
+            venueDesc: "Мы с нетерпением ждем возможности отпраздновать наш особенный день с вами в великолепном отеле Hilton Astana.",
+            hotelInfo: "Отель предлагает элегантные залы, безупречный сервис и комфортабельные условия, чтобы сделать наше торжество незабываемым.",
+            footerText: "© 2031 Еркежан & Бекзат. Все права защищены."
         },
         kz: {
             title: "Еркежан мен Бекзаттың үйлену тойы",
             countdownPrefix: "Үйлену тойына дейін",
             countdownSuffix: "қалды",
             eventHappened: "Іс-шара өтті!",
-            confirm: "Қатысуыңызды растауыңызды сұраймыз:",
+            confirm: "Сіздің қатысуыңызды растауыңызды сұраймыз, осылайша біз сіздің жайлылығыңыз үшін әрбір егжей-тегжейге көңіл бөле аламыз:",
             inputPlaceholder: "Аты-жөніңізді енгізіңіз",
-            needHotel: "Сізге Hilton Astana қонақ үйінде тұру қажет пе? (арнайы баға — 55 000 ₸)",
+            needHotel: "Сізге Hilton Astana қонақ үйінде тұру қажет пе? Біздің қонақтар үшін арнайы баға бар — бір түнге 55 000 ₸.",
             yesText: "Иә",
             noText: "Жоқ",
             submit: "Жіберу",
             ourMoments: "Біздің ең жақсы сәттеріміз",
-            ourMomentsDesc: "Біздің сүйікті бірлескен фотосуреттерімізді қараңыз!",
+            ourMomentsDesc: "Біздің естеліктерімізге сүңгіңіз! Мұнда сіз біздің ең сүйікті және жүрекке жақын бірлескен фотосуреттерімізді таба аласыз.",
             venue: "Өткізу орны",
-            venueDesc: "Біздің салтанатты мерекеміз Hilton Astana қонақүйінде өтеді.",
-            hotelInfo: "Қонақ үй сіздің жайлылығыңыз үшін талғампаз залдар мен жоғары деңгейлі қызмет көрсетеді."
+            venueDesc: "Біз сізбен бірге ерекше күнімізді тамаша Hilton Astana қонақүйінде тойлауды асыға күтеміз.",
+            hotelInfo: "Қонақ үй біздің салтанатты мерекемізді ұмытылмас ету үшін талғампаз залдарды, мінсіз қызмет көрсетуді және ыңғайлы жағдайларды ұсынады.",
+            footerText: "© 2031 Еркежан & Бекзат. Барлық құқықтар қорғалған."
         }
     };
 
@@ -431,14 +447,13 @@
         document.getElementById('noText').innerText = t.noText;
         document.getElementById('submit').value = t.submit;
 
-        // Update content sections
         document.querySelector('.content-section:nth-of-type(1) h2').innerText = t.ourMoments;
-        document.querySelector('.content-section:nth-of-type(1) p').innerText = t.ourMomentsDesc;
+        document.querySelector('.content-section:nth-of-type(1) p:nth-of-type(1)').innerText = t.ourMomentsDesc;
         document.querySelector('.content-section:nth-of-type(2) h2').innerText = t.venue;
         document.querySelector('.content-section:nth-of-type(2) p:nth-of-type(1)').innerText = t.venueDesc;
         document.querySelector('.content-section:nth-of-type(2) p:nth-of-type(2)').innerText = t.hotelInfo;
+        document.querySelector('footer p').innerText = t.footerText;
 
-        // Update countdown immediately after language change
         updateCountdownDisplay();
     }
 
@@ -462,27 +477,23 @@
     }
 
     function startCountdown() {
-        // Initial call
         updateCountdownDisplay();
-        // Update every second
         setInterval(updateCountdownDisplay, 1000);
     }
 
-    // Call startCountdown to begin the countdown
     startCountdown();
 
-    // Intersection Observer for scroll animations
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1 // When 10% of the element is visible
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Stop observing once animated
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -491,9 +502,8 @@
         observer.observe(element);
     });
 
-    // Initial language set to Russian on load
     document.addEventListener('DOMContentLoaded', () => {
-        setLanguage('ru');
+        setLanguage('ru'); // Установка языка по умолчанию при загрузке
     });
 </script>
 </body>
