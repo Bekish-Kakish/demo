@@ -1,95 +1,175 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Приглашение на свадьбу</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: #f8f8f8;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #b2a4ff, #a6e3e9);
       color: #333;
       text-align: center;
-      padding: 2rem;
+    }
+    header {
+      padding: 20px;
+      position: relative;
+    }
+    .language-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .language-switcher button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      border: none;
+      background: #ffffff99;
+      border-radius: 5px;
+      cursor: pointer;
     }
     h1 {
-      font-size: 2.5rem;
-      color: #b44b4b;
+      font-size: 2.5em;
+      margin-bottom: 10px;
     }
-    .timer {
-      font-size: 2rem;
-      margin: 1rem 0;
+    .countdown {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #555;
     }
-    .section {
-      margin: 2rem 0;
-    }
-    iframe {
-      border: none;
+    .hero-image {
       width: 100%;
-      max-width: 600px;
       height: 300px;
+      background: url('https://via.placeholder.com/1200x300.png?text=Hilton+Astana') center/cover no-repeat;
+      margin-bottom: 20px;
     }
-    .rsvp {
-      background: #b44b4b;
+    form {
+      background: #ffffffcc;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, label {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .radio-group {
+      display: flex;
+      justify-content: space-around;
+    }
+    .radio-group label {
+      width: auto;
+    }
+    input[type="submit"] {
+      background-color: #a084dc;
       color: white;
-      padding: 1rem 2rem;
+      border: none;
+      padding: 10px 20px;
       border-radius: 10px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 1.5rem;
+      cursor: pointer;
+    }
+    footer {
+      margin-top: 20px;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <h1>Айгуль ❤️ Тимур</h1>
-  <div class="section">
-    <p>Мы будем счастливы видеть вас на нашей свадьбе!</p>
-    <p><strong>25 августа 2025 года, в 17:00</strong></p>
-  </div>
+  <header>
+    <div class="language-switcher">
+      <button onclick="setLanguage('ru')">Русский</button>
+      <button onclick="setLanguage('kz')">Қазақша</button>
+    </div>
+    <h1 id="title">Свадьба Еркежан и Бекзат</h1>
+    <div class="countdown" id="countdown"></div>
+    <p id="date">30 марта 2031, 16:00</p>
+    <p id="address">Hilton Astana, ул. Гейдара Алиева, 14</p>
+  </header>
 
-  <div class="section">
-    <div class="timer" id="timer">Загрузка таймера...</div>
-  </div>
+  <div class="hero-image"></div>
 
-  <div class="section">
-    <h2>Место проведения:</h2>
-    <p>Astana Grand Hall, г. Астана</p>
-    <iframe
-      src="https://maps.google.com/maps?q=astana&t=&z=13&ie=UTF8&iwloc=&output=embed"
-      allowfullscreen=""
-    ></iframe>
-  </div>
+  <form>
+    <label id="confirm">Пожалуйста, подтвердите ваше присутствие:</label>
+    <input type="text" id="input" placeholder="Введите ваши имена (супруг/супруга)">
+    <label id="needHotel">Нужно ли вам проживание в отеле Hilton Astana? (спец. цена — 55 000 тг)</label>
+    <div class="radio-group">
+      <label><input type="radio" name="hotel" id="yes"> <span id="yesText">Да</span></label>
+      <label><input type="radio" name="hotel" id="no"> <span id="noText">Нет</span></label>
+    </div>
+    <input type="submit" id="submit" value="Отправить">
+  </form>
 
-  <div class="section">
-    <h2>Подтвердите своё присутствие</h2>
-    <a class="rsvp" href="https://forms.gle/YOUR_GOOGLE_FORM" target="_blank">Я приду!</a>
-  </div>
+  <footer>
+    <p>© 2031 Еркежан & Бекзат</p>
+  </footer>
 
   <script>
-    // Таймер до даты
-    const eventDate = new Date("2025-08-25T17:00:00");
-    const timerEl = document.getElementById("timer");
-
-    function updateTimer() {
-      const now = new Date();
-      const diff = eventDate - now;
-
-      if (diff <= 0) {
-        timerEl.innerText = "До встречи на свадьбе!";
-        return;
+    const translations = {
+      ru: {
+        title: 'Свадьба Еркежан и Бекзат',
+        date: '30 марта 2031, 16:00',
+        address: 'Hilton Astana, ул. Гейдара Алиева, 14',
+        confirm: 'Пожалуйста, подтвердите ваше присутствие:',
+        input: 'Введите ваши имена (супруг/супруга)',
+        needHotel: 'Нужно ли вам проживание в отеле Hilton Astana? (спец. цена — 55 000 тг)',
+        yes: 'Да',
+        no: 'Нет',
+        submit: 'Отправить'
+      },
+      kz: {
+        title: 'Еркежан мен Бекзаттың үйлену тойы',
+        date: '2031 жылғы 30 наурыз, 16:00',
+        address: 'Hilton Astana қонақ үйі, Гейдар Әлиев көшесі, 14',
+        confirm: 'Қатысатыныңызды растаңыз:',
+        input: 'Есімдеріңізді енгізіңіз (жұбайыңыз/жұбайыңыз)',
+        needHotel: 'Hilton Astana қонақ үйінде тұру қажет пе? (арнайы баға — 55 000 тг)',
+        yes: 'Иә',
+        no: 'Жоқ',
+        submit: 'Жіберу'
       }
+    };
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      timerEl.innerText = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+    function setLanguage(lang) {
+      const t = translations[lang];
+      document.getElementById('title').innerText = t.title;
+      document.getElementById('date').innerText = t.date;
+      document.getElementById('address').innerText = t.address;
+      document.getElementById('confirm').innerText = t.confirm;
+      document.getElementById('input').placeholder = t.input;
+      document.getElementById('needHotel').innerText = t.needHotel;
+      document.getElementById('yesText').textContent = t.yes;
+      document.getElementById('noText').textContent = t.no;
+      document.getElementById('submit').value = t.submit;
     }
 
-    setInterval(updateTimer, 1000);
-    updateTimer();
+    function startCountdown() {
+      const weddingDate = new Date("2031-03-30T16:00:00").getTime();
+      const countdownEl = document.getElementById('countdown');
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+        if (distance <= 0) {
+          countdownEl.innerText = 'Событие уже состоялось!';
+          return;
+        }
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countdownEl.innerText = `До свадьбы осталось: ${days}д ${hours}ч ${minutes}м ${seconds}с`;
+      }, 1000);
+    }
+
+    startCountdown();
   </script>
 </body>
 </html>
