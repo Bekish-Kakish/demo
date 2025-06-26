@@ -1,205 +1,500 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Свадьба Еркежан и Бекзат</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Свадьба Еркежан и Бекзат</title>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500&display=swap');
 
-    *, *::before, *::after { box-sizing: border-box; }
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
     body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #eaf2ff, #fff0f8);
-      color: #333;
-      text-align: center;
-      overflow-x: hidden;
-      position: relative;
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, #eaf2ff, #fff0f8);
+        color: #333;
+        text-align: center;
+        overflow-x: hidden;
+        position: relative;
     }
-    /* Лёгкая анимация блёсток */
+
+    /* Анимированный звездный фон */
+    .stars-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        animation: twinkle linear infinite;
+        opacity: 0;
+    }
+
+    @keyframes twinkle {
+        0%, 100% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Лёгкая анимация блёсток (дополнительно к звездам) */
     .particle {
-      position: absolute;
-      width: 8px; height: 8px;
-      background: rgba(255,255,255,0.8);
-      border-radius: 50%;
-      animation: fall 10s infinite ease-in;
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: fall 10s infinite ease-in;
     }
+
     @keyframes fall {
-      0% { transform: translateY(-200px) scale(0.5); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translateY(110vh) scale(1); opacity: 0; }
+        0% { transform: translateY(-200px) scale(0.5); opacity: 0; }
+        10% { opacity: 1; }
+        100% { transform: translateY(110vh) scale(1); opacity: 0; }
     }
 
     header {
-      padding: 40px 20px 60px;
-      position: relative;
-      font-family: 'Playfair Display', serif;
+        padding: 40px 20px 60px;
+        position: relative;
+        font-family: 'Playfair Display', serif;
+        z-index: 1; /* Ensure header is above the background */
     }
+
     .language-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
     }
+
     .language-switcher button {
-      margin: 0 5px;
-      padding: 6px 12px;
-      border: none;
-      background: rgba(255,255,255,0.7);
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background .3s;
+        margin: 0 5px;
+        padding: 6px 12px;
+        border: none;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background .3s;
     }
+
     .language-switcher button:hover {
-      background: rgba(255,255,255,1);
+        background: rgba(255, 255, 255, 1);
     }
+
     h1 {
-      font-size: 3em;
-      margin: 0;
-      color: #5a4d9d;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        font-size: 3em;
+        margin: 0;
+        color: #5a4d9d;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+
     .countdown {
-      font-size: 1.2em;
-      margin: 10px 0;
-      color: #555;
+        font-size: 1.2em;
+        margin: 10px 0;
+        color: #555;
     }
+
     #date, #address {
-      margin: 5px 0;
-      font-style: italic;
-      color: #444;
+        margin: 5px 0;
+        font-style: italic;
+        color: #444;
     }
+
     .hero-image {
-      width: 100%;
-      height: 350px;
-      background: url('https://via.placeholder.com/1200x350.png?text=Hilton+Astana') center/cover no-repeat;
-      position: relative;
-      margin-bottom: 30px;
-      filter: brightness(0.85);
+        width: 100%;
+        height: 350px;
+        background: url('https://via.placeholder.com/1200x350.png?text=Hilton+Astana') center/cover no-repeat;
+        position: relative;
+        margin-bottom: 30px;
+        filter: brightness(0.85);
+        opacity: 0; /* For scroll animation */
+        transform: translateY(20px); /* For scroll animation */
+        transition: all 0.8s ease-out; /* For scroll animation */
+        z-index: 1;
     }
+
+    .hero-image.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     .overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.2);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Секции контента */
+    .content-section {
+        background: #fff;
+        max-width: 800px; /* Wider for better content display */
+        margin: 40px auto;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+        opacity: 0; /* For scroll animation */
+        transform: translateY(30px); /* For scroll animation */
+        transition: all 0.8s ease-out; /* For scroll animation */
+    }
+
+    .content-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .content-section h2 {
+        font-family: 'Playfair Display', serif;
+        color: #5a4d9d;
+        font-size: 2.2em;
+        margin-bottom: 25px;
+    }
+
+    .pdf-viewer {
+        width: 100%;
+        height: 500px; /* Adjust height as needed */
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .image-gallery img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .image-gallery img:hover {
+        transform: scale(1.05);
     }
 
     form {
-      background: #fff;
-      max-width: 540px;
-      margin: -60px auto 40px;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-      position: relative;
-      z-index: 1;
+        background: #fff;
+        max-width: 540px;
+        margin: -60px auto 40px; /* Adjust margin to fit content sections */
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+        opacity: 0; /* For scroll animation */
+        transform: translateY(30px); /* For scroll animation */
+        transition: all 0.8s ease-out; /* For scroll animation */
     }
-    form p { margin: 0 0 12px; font-weight: 500; color: #333; }
+
+    form.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    form p {
+        margin: 0 0 12px;
+        font-weight: 500;
+        color: #333;
+    }
+
     input[type=text] {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 18px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1em;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 18px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1em;
     }
+
     .radio-group {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 18px;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 18px;
     }
+
     .radio-group label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1em;
-      cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1em;
+        cursor: pointer;
     }
+
     .radio-group input {
-      accent-color: #5a4d9d;
-      width: 18px;
-      height: 18px;
+        accent-color: #5a4d9d;
+        width: 18px;
+        height: 18px;
     }
+
     input[type=submit] {
-      background-color: #5a4d9d;
-      color: #fff;
-      border: none;
-      padding: 14px 26px;
-      font-size: 1.1em;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background .3s, transform .1s;
+        background-color: #5a4d9d;
+        color: #fff;
+        border: none;
+        padding: 14px 26px;
+        font-size: 1.1em;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background .3s, transform .1s;
     }
+
     input[type=submit]:hover {
-      background-color: #4a3b7a;
-      transform: translateY(-2px);
+        background-color: #4a3b7a;
+        transform: translateY(-2px);
     }
 
     footer {
-      margin: 40px 0;
-      color: #777;
-      font-size: 0.9em;
+        margin: 40px 0;
+        color: #777;
+        font-size: 0.9em;
+        opacity: 0; /* For scroll animation */
+        transform: translateY(20px); /* For scroll animation */
+        transition: all 0.8s ease-out; /* For scroll animation */
     }
+
+    footer.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     @media (max-width: 600px) {
-      h1 { font-size: 2.4em; }
-      form { margin: -40px 20px 30px; padding: 20px; }
+        h1 {
+            font-size: 2.4em;
+        }
+
+        form {
+            margin: -40px 20px 30px;
+            padding: 20px;
+        }
+
+        .content-section {
+            margin: 20px;
+            padding: 25px;
+        }
+
+        .pdf-viewer {
+            height: 350px;
+        }
     }
-  </style>
+</style>
 </head>
 <body>
-  <!-- анимированные частички -->
-  <script>
-    for (let i = 0; i < 30; i++) {
-      const d = document.createElement('div');
-      d.className = 'particle';
-      d.style.left = Math.random() * 100 + 'vw';
-      d.style.animationDelay = Math.random() * 10 + 's';
-      d.style.width = d.style.height = (4 + Math.random() * 8) + 'px';
-      document.body.appendChild(d);
-    }
-  </script>
 
-  <header>
+<div class="stars-background" id="starsBackground"></div>
+
+<script>
+    for (let i = 0; i < 30; i++) {
+        const d = document.createElement('div');
+        d.className = 'particle';
+        d.style.left = Math.random() * 100 + 'vw';
+        d.style.animationDelay = Math.random() * 10 + 's';
+        d.style.width = d.style.height = (4 + Math.random() * 8) + 'px';
+        document.body.appendChild(d);
+    }
+
+    // Создание звезд для фона
+    const starsBackground = document.getElementById('starsBackground');
+    for (let i = 0; i < 150; i++) { // More stars for a fuller effect
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = star.style.height = `${Math.random() * 3 + 1}px`; // Random size between 1px and 4px
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.animationDelay = `${Math.random() * 5}s`; // Different delays for twinkling
+        star.style.animationDuration = `${Math.random() * 3 + 2}s`; // Different durations
+        starsBackground.appendChild(star);
+    }
+</script>
+
+<header>
     <div class="language-switcher">
-      <button onclick="setLanguage('ru')">Русский</button>
-      <button onclick="setLanguage('kz')">Қазақша</button>
+        <button onclick="setLanguage('ru')">Русский</button>
+        <button onclick="setLanguage('kz')">Қазақша</button>
     </div>
     <h1 id="title">Свадьба Еркежан и Бекзат</h1>
     <div class="countdown" id="countdown"></div>
     <p id="date">30 марта 2031, 16:00</p>
     <p id="address">Hilton Astana, ул. Гейдара Алиева, 14</p>
-  </header>
+</header>
 
-  <div class="hero-image"><div class="overlay"></div></div>
+<div class="hero-image" data-animate-on-scroll>
+    <div class="overlay"></div>
+</div>
 
-  <form>
+<form data-animate-on-scroll>
     <p id="confirm">Пожалуйста, подтвердите ваше присутствие:</p>
     <input type="text" id="input" placeholder="Введите ваши имена">
-    <p id="needHotel">Нужно ли вам проживание в отеле Hilton Astana? (спец. цена — 55 000 ₸)</p>
+    <p id="needHotel">Нужно ли вам проживание в отеле Hilton Astana? (спец. цена — 55 000 ₸)</p>
     <div class="radio-group">
-      <label><input type="radio" name="hotel" id="yes"><span id="yesText">Да</span></label>
-      <label><input type="radio" name="hotel" id="no"><span id="noText">Нет</span></label>
+        <label><input type="radio" name="hotel" id="yes"><span id="yesText">Да</span></label>
+        <label><input type="radio" name="hotel" id="no"><span id="noText">Нет</span></label>
     </div>
     <input type="submit" id="submit" value="Отправить">
-  </form>
+</form>
 
-  <footer><p>© 2031 Еркежан & Бекзат</p></footer>
+<div class="content-section" data-animate-on-scroll>
+    <h2>Наши лучшие моменты</h2>
+    <p>Посмотрите некоторые из наших любимых совместных фотографий!</p>
+    <div class="pdf-viewer">
+        <iframe src="https://www.africau.edu/images/default/sample.pdf#toolbar=0" width="100%" height="100%" style="border:none;"></iframe>
+    </div>
+    <div class="image-gallery">
+        <img src="https://via.placeholder.com/200x150?text=Фото+1" alt="Совместное фото 1">
+        <img src="https://via.placeholder.com/200x150?text=Фото+2" alt="Совместное фото 2">
+        <img src="https://via.placeholder.com/200x150?text=Фото+3" alt="Совместное фото 3">
+        <img src="https://via.placeholder.com/200x150?text=Фото+4" alt="Совместное фото 4">
+    </div>
+</div>
 
-  <script>
-    const translations = { /* ... как раньше ... */ };
-    function setLanguage(lang) { /* как раньше */ }
-    function startCountdown() {
-      const weddingDate = new Date("2031-03-30T16:00:00").getTime();
-      const countdownEl = document.getElementById('countdown');
-      setInterval(() => {
-        const d = weddingDate - Date.now();
-        if (d <= 0) { countdownEl.innerText = 'Событие уже состоялось!'; return; }
-        const days = Math.floor(d/86400000), hrs = Math.floor((d%86400000)/3600000);
-        const mins = Math.floor((d%3600000)/60000), secs = Math.floor((d%60000)/1000);
-        countdownEl.innerText = `До свадьбы ${days}д ${hrs}ч ${mins}м ${secs}с`;
-      }, 1000);
+<div class="content-section" data-animate-on-scroll>
+    <h2>Место проведения</h2>
+    <p>Наше торжество пройдет в великолепном отеле Hilton Astana.</p>
+    <div class="pdf-viewer">
+        <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0" width="100%" height="100%" style="border:none;"></iframe>
+    </div>
+    <p>Отель предлагает элегантные залы и высококлассное обслуживание для вашего комфорта.</p>
+</div>
+
+<footer data-animate-on-scroll>
+    <p>© 2031 Еркежан & Бекзат</p>
+</footer>
+
+<script>
+    // Объект для переводов (как вы уже начали)
+    const translations = {
+        ru: {
+            title: "Свадьба Еркежан и Бекзат",
+            countdownPrefix: "До свадьбы",
+            countdownSuffix: "",
+            eventHappened: "Событие уже состоялось!",
+            confirm: "Пожалуйста, подтвердите ваше присутствие:",
+            inputPlaceholder: "Введите ваши имена",
+            needHotel: "Нужно ли вам проживание в отеле Hilton Astana? (спец. цена — 55 000 ₸)",
+            yesText: "Да",
+            noText: "Нет",
+            submit: "Отправить",
+            ourMoments: "Наши лучшие моменты",
+            ourMomentsDesc: "Посмотрите некоторые из наших любимых совместных фотографий!",
+            venue: "Место проведения",
+            venueDesc: "Наше торжество пройдет в великолепном отеле Hilton Astana.",
+            hotelInfo: "Отель предлагает элегантные залы и высококлассное обслуживание для вашего комфорта."
+        },
+        kz: {
+            title: "Еркежан мен Бекзаттың үйлену тойы",
+            countdownPrefix: "Үйлену тойына дейін",
+            countdownSuffix: "қалды",
+            eventHappened: "Іс-шара өтті!",
+            confirm: "Қатысуыңызды растауыңызды сұраймыз:",
+            inputPlaceholder: "Аты-жөніңізді енгізіңіз",
+            needHotel: "Сізге Hilton Astana қонақ үйінде тұру қажет пе? (арнайы баға — 55 000 ₸)",
+            yesText: "Иә",
+            noText: "Жоқ",
+            submit: "Жіберу",
+            ourMoments: "Біздің ең жақсы сәттеріміз",
+            ourMomentsDesc: "Біздің сүйікті бірлескен фотосуреттерімізді қараңыз!",
+            venue: "Өткізу орны",
+            venueDesc: "Біздің салтанатты мерекеміз Hilton Astana қонақүйінде өтеді.",
+            hotelInfo: "Қонақ үй сіздің жайлылығыңыз үшін талғампаз залдар мен жоғары деңгейлі қызмет көрсетеді."
+        }
+    };
+
+    let currentLang = 'ru'; // Default language
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+        document.getElementById('title').innerText = t.title;
+        document.getElementById('confirm').innerText = t.confirm;
+        document.getElementById('input').placeholder = t.inputPlaceholder;
+        document.getElementById('needHotel').innerText = t.needHotel;
+        document.getElementById('yesText').innerText = t.yesText;
+        document.getElementById('noText').innerText = t.noText;
+        document.getElementById('submit').value = t.submit;
+
+        // Update content sections
+        document.querySelector('.content-section:nth-of-type(1) h2').innerText = t.ourMoments;
+        document.querySelector('.content-section:nth-of-type(1) p').innerText = t.ourMomentsDesc;
+        document.querySelector('.content-section:nth-of-type(2) h2').innerText = t.venue;
+        document.querySelector('.content-section:nth-of-type(2) p:nth-of-type(1)').innerText = t.venueDesc;
+        document.querySelector('.content-section:nth-of-type(2) p:nth-of-type(2)').innerText = t.hotelInfo;
+
+        // Update countdown immediately after language change
+        updateCountdownDisplay();
     }
+
+    function updateCountdownDisplay() {
+        const weddingDate = new Date("2031-03-30T16:00:00").getTime();
+        const countdownEl = document.getElementById('countdown');
+        const d = weddingDate - Date.now();
+        const t = translations[currentLang];
+
+        if (d <= 0) {
+            countdownEl.innerText = t.eventHappened;
+            return;
+        }
+
+        const days = Math.floor(d / 86400000);
+        const hrs = Math.floor((d % 86400000) / 3600000);
+        const mins = Math.floor((d % 3600000) / 60000);
+        const secs = Math.floor((d % 60000) / 1000);
+
+        countdownEl.innerText = `${t.countdownPrefix} ${days}д ${hrs}ч ${mins}м ${secs}с${t.countdownSuffix}`;
+    }
+
+    function startCountdown() {
+        // Initial call
+        updateCountdownDisplay();
+        // Update every second
+        setInterval(updateCountdownDisplay, 1000);
+    }
+
+    // Call startCountdown to begin the countdown
     startCountdown();
-  </script>
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // When 10% of the element is visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Stop observing once animated
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-animate-on-scroll]').forEach(element => {
+        observer.observe(element);
+    });
+
+    // Initial language set to Russian on load
+    document.addEventListener('DOMContentLoaded', () => {
+        setLanguage('ru');
+    });
+</script>
 </body>
 </html>
