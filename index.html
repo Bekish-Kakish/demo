@@ -1,250 +1,522 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Banquet - Банкетный зал</title>
-  <style>
-    /* Сброс и базовые стили */
-    * {
-      box-sizing: border-box;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Свадьба Еркежан и Бекзат</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+    /* Общие стили и сбросы */
+    *, *::before, *::after {
+        box-sizing: border-box;
     }
+
     body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: #f5f7fa;
-      color: #333;
-      line-height: 1.6;
-    }
-    a {
-      color: #1e90ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, #f0f4ff, #fff0f5); /* Очень нежный градиент */
+        color: #333;
+        text-align: center;
+        overflow-x: hidden;
+        position: relative;
     }
 
+    /* Звездный фон с анимацией */
+    .stars-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at bottom, #1e2a4a 0%, #0a0a1a 100%); /* Глубокий синий/фиолетовый */
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    .star {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: twinkle linear infinite;
+        opacity: 0;
+    }
+
+    @keyframes twinkle {
+        0%, 100% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Общие стили для секций контента (без рамок) */
+    .content-section {
+        background: rgba(255, 255, 255, 0.95); /* Полупрозрачный белый фон для контента */
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 1;
+        opacity: 0; /* Для анимации появления */
+        transform: translateY(30px); /* Для анимации появления */
+        transition: all 0.8s ease-out;
+    }
+
+    .content-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .content-section h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8em;
+        color: #7a42a0; /* Глубокий фиолетовый для заголовков */
+        margin-bottom: 25px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    .content-section p {
+        font-size: 1.1em;
+        line-height: 1.7;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    /* Header - Секция с именами и отсчетом */
     header {
-      background-color: #1e90ff;
-      color: white;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
-    header h1 {
-      font-weight: 700;
-      font-size: 1.8rem;
-      margin: 0;
-    }
-    nav a {
-      margin-left: 20px;
-      font-weight: 600;
-      font-size: 1rem;
+        padding: 80px 20px 60px;
+        position: relative;
+        z-index: 2;
+        background: radial-gradient(circle at top center, rgba(162, 117, 204, 0.2) 0%, rgba(255, 255, 255, 0) 70%); /* Легкое свечение сверху */
     }
 
-    .hero {
-      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-      padding: 0 20px;
-      text-align: center;
+    .language-switcher {
+        position: absolute;
+        top: 20px;
+        right: 20px;
     }
-    .hero h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      font-weight: 700;
+    .language-switcher button {
+        margin: 0 5px;
+        padding: 8px 15px;
+        border: none;
+        background: rgba(255,255,255,0.7);
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background .3s, transform .1s;
+        color: #7a42a0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 600px;
-      margin-bottom: 30px;
-    }
-    .btn-primary {
-      background-color: #1e90ff;
-      color: white;
-      padding: 14px 32px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(30,144,255,0.6);
-      transition: background-color 0.3s ease;
-    }
-    .btn-primary:hover {
-      background-color: #1a7ddd;
+    .language-switcher button:hover {
+        background: rgba(255,255,255,1);
+        transform: translateY(-1px);
     }
 
-    section {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 0 20px;
+    .names-heading {
+        font-family: 'Great Vibes', cursive; /* Красивый рукописный шрифт */
+        font-size: 5.5em; /* Очень крупный для имен */
+        color: #b768d8; /* Яркий, но нежный фиолетовый */
+        margin: 0;
+        text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        line-height: 1.1;
     }
-    section h3 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #1e90ff;
-      text-align: center;
-    }
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 30px;
-    }
-    .feature-item {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-      flex: 1 1 280px;
-      max-width: 320px;
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .feature-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 25px rgba(30,144,255,0.3);
-    }
-    .feature-item img {
-      width: 80px;
-      margin-bottom: 15px;
-    }
-    .feature-item h4 {
-      margin-bottom: 12px;
-      color: #1e90ff;
-    }
-    .feature-item p {
-      font-size: 1rem;
-      color: #555;
+    .names-heading span {
+        font-family: 'Great Vibes', cursive;
+        color: #ffe0f0; /* Более светлый акцентный цвет для "и" */
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 40px;
+    .header-info {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2em;
+        margin-top: 20px;
+        color: #666;
     }
-    .gallery img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      cursor: pointer;
+    .countdown {
+        font-size: 1.8em; /* Крупнее для отсчета */
+        margin-top: 25px;
+        color: #7a42a0;
+        font-weight: 600;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .gallery img:hover {
-      transform: scale(1.05);
+
+    /* Галерея фотографий пары */
+    .photo-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2-3 фото в ряд */
+        gap: 30px;
+        margin-top: 40px;
+    }
+    .photo-gallery img {
+        width: 100%;
+        height: 300px; /* Фиксированная высота */
+        object-fit: cover; /* Обрезка по размеру */
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .photo-gallery img:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
+
+    /* Секция отеля */
+    .hotel-section img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        margin-top: 30px;
+    }
+
+    /* Форма заявки */
+    form {
+        max-width: 600px;
+        margin: 50px auto 80px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.98); /* Почти непрозрачный белый */
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        position: relative;
+        z-index: 1;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+    }
+    form.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    form h2 { /* Отдельный стиль для заголовка формы */
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2em;
+        color: #7a42a0;
+        margin-bottom: 25px;
+    }
+
+    input[type=text] {
+        width: calc(100% - 20px); /* Учитываем padding */
+        padding: 15px 10px;
+        margin-bottom: 25px;
+        border-radius: 10px;
+        border: 1px solid #dcdcdc;
+        font-size: 1.1em;
+        font-family: 'Montserrat', sans-serif;
+        background: #fdfdff;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input[type=text]:focus {
+        border-color: #a275d0;
+        box-shadow: 0 0 0 3px rgba(162, 117, 204, 0.1);
+        outline: none;
+    }
+
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 30px;
+    }
+    .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1em;
+        color: #555;
+        cursor: pointer;
+    }
+    .radio-group input[type=radio] {
+        accent-color: #7a42a0; /* Цвет для радио-кнопок */
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #7a42a0;
+        color: #fff;
+        border: none;
+        padding: 16px 35px;
+        font-size: 1.15em;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background .3s, transform .2s, box-shadow 0.3s;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        box-shadow: 0 5px 15px rgba(122, 66, 160, 0.3);
+    }
+    input[type=submit]:hover {
+        background-color: #6a3690;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(122, 66, 160, 0.4);
     }
 
     footer {
-      background-color: #1e90ff;
-      color: white;
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 0.9rem;
-      margin-top: 60px;
+        margin: 60px 0 40px;
+        color: #888;
+        font-size: 0.9em;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease-out;
+        z-index: 1;
+    }
+    footer.is-visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    /* Адаптив */
+    /* Адаптивность */
     @media (max-width: 768px) {
-      .features {
-        flex-direction: column;
-        align-items: center;
-      }
-      header {
-        flex-direction: column;
-        gap: 15px;
-      }
-      nav a {
-        margin-left: 0;
-        margin-right: 15px;
-      }
+        .names-heading { font-size: 4em; }
+        .countdown { font-size: 1.5em; }
+        .content-section, form {
+            margin: 40px 20px;
+            padding: 30px;
+        }
+        .photo-gallery {
+            grid-template-columns: 1fr; /* Одна колонка на узких экранах */
+            gap: 20px;
+        }
+        .photo-gallery img { height: 250px; }
+        .content-section h2 { font-size: 2.2em; }
+        form h2 { font-size: 1.8em; }
+        input[type=text], input[type=submit] { font-size: 1em; padding: 12px 8px; }
+        .radio-group { flex-direction: column; gap: 15px; }
     }
-  </style>
+
+    @media (max-width: 480px) {
+        header { padding: 60px 10px 40px; }
+        .names-heading { font-size: 3em; }
+        .header-info { font-size: 1em; }
+        .countdown { font-size: 1.2em; }
+        .content-section, form { padding: 25px 15px; margin: 30px 15px; }
+        .content-section h2 { font-size: 2em; }
+        form h2 { font-size: 1.6em; }
+        .language-switcher { top: 10px; right: 10px; }
+        .language-switcher button { padding: 6px 10px; font-size: 0.8em; }
+    }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Banquet</h1>
-    <nav>
-      <a href="#about">О нас</a>
-      <a href="#services">Услуги</a>
-      <a href="#gallery">Галерея</a>
-      <a href="#contact">Контакты</a>
-    </nav>
-  </header>
 
-  <section class="hero">
-    <h2>Идеальное место для вашего торжества</h2>
-    <p>Просторный банкетный зал с современным интерьером и профессиональным обслуживанием.</p>
-    <button class="btn-primary">Забронировать сейчас</button>
-  </section>
+<div class="stars-background" id="starsBackground"></div>
 
-  <section id="about">
-    <h3>О нас</h3>
-    <p style="max-width: 700px; margin: 0 auto 40px;">
-      Banquet — это уютный банкетный зал, расположенный в центре города. Мы предлагаем комфортные условия для проведения свадеб, корпоративов и других мероприятий.
+<script>
+    const starsBackground = document.getElementById('starsBackground');
+    for (let i = 0; i < 200; i++) { // Больше звезд для эффекта
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = star.style.height = `${Math.random() * 2 + 1}px`; // Размер от 1px до 3px
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        starsBackground.appendChild(star);
+    }
+</script>
+
+<header>
+    <div class="language-switcher">
+        <button onclick="setLanguage('ru')">Русский</button>
+        <button onclick="setLanguage('kz')">Қазақша</button>
+    </div>
+    <h1 class="names-heading" id="mainNames">Еркежан <span>и</span> Бекзат</h1>
+    <p class="header-info" id="dateAndLocation">30 марта 2031, 16:00 | Hilton Astana, Астана</p>
+    <div class="countdown" id="countdown"></div>
+</header>
+
+<div class="content-section" data-animate-on-scroll>
+    <h2 id="invitationHeading">Дорогие гости!</h2>
+    <p id="invitationText">
+        Мы с огромной радостью приглашаем вас разделить с нами самый особенный день нашей жизни,
+        день, когда наши сердца соединятся в единое целое.
     </p>
-  </section>
+    <p id="invitationMoreText">
+        Это будет начало нашей общей истории, наполненной любовью, счастьем и незабываемыми моментами.
+        Ваше присутствие на этом празднике станет для нас самым ценным подарком!
+    </p>
+</div>
 
-  <section id="services">
-    <h3>Наши услуги</h3>
-    <div class="features">
-      <div class="feature-item">
-        <img src="https://img.icons8.com/ios-filled/100/1e90ff/wedding.png" alt="Свадьбы" />
-        <h4>Свадьбы</h4>
-        <p>Организация свадебных торжеств с индивидуальным подходом и вниманием к деталям.</p>
-      </div>
-      <div class="feature-item">
-        <img src="https://img.icons8.com/ios-filled/100/1e90ff/meeting.png" alt="Корпоративы" />
-        <h4>Корпоративы</h4>
-        <p>Проведение корпоративных мероприятий с профессиональным кейтерингом и развлекательной программой.</p>
-      </div>
-      <div class="feature-item">
-        <img src="https://img.icons8.com/ios-filled/100/1e90ff/party-baloons.png" alt="Дни рождения" />
-        <h4>Дни рождения</h4>
-        <p>Праздничные мероприятия с оформлением и анимацией для всех возрастов.</p>
-      </div>
+<div class="content-section" data-animate-on-scroll>
+    <h2 id="ourPhotosHeading">Наши моменты</h2>
+    <p id="ourPhotosText">
+        Взгляните на некоторые из наших любимых совместных фотографий,
+        которые рассказывают историю нашей любви.
+    </p>
+    <div class="photo-gallery">
+        <img src="https://via.placeholder.com/400x300/f0e0f8/8a42a0?text=Еркежан+и+Бекзат+1" alt="Еркежан и Бекзат 1">
+        <img src="https://via.placeholder.com/400x300/e0f0f8/8a42a0?text=Еркежан+и+Бекзат+2" alt="Еркежан и Бекзат 2">
+        <img src="https://via.placeholder.com/400x300/f8e0f0/8a42a0?text=Еркежан+и+Бекзат+3" alt="Еркежан и Бекзат 3">
+        <img src="https://via.placeholder.com/400x300/e0f8f0/8a42a0?text=Еркежан+и+Бекзат+4" alt="Еркежан и Бекзат 4">
     </div>
-  </section>
+</div>
 
-  <section id="gallery">
-    <h3>Галерея</h3>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Фото 1" />
-      <img src="https://images.unsplash.com/photo-1529253355930-9a1f1e9b9f3a?auto=format&fit=crop&w=600&q=80" alt="Фото 2" />
-      <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Фото 3" />
-      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Фото 4" />
+<div class="content-section hotel-section" data-animate-on-scroll>
+    <h2 id="venueHeading">Место проведения</h2>
+    <p id="venueText">
+        Наше торжество состоится в одном из самых престижных мест столицы —
+        элегантном отеле Hilton Astana.
+    </p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Hilton_Hotel_Astana_-_ panoramio_%281%29.jpg/1200px-Hilton_Hotel_Astana_-_ panoramio_%281%29.jpg" alt="Hilton Astana" id="hotelPhoto">
+    <p id="hotelDescription">
+        Отель Hilton Astana, расположенный по адресу ул. Гейдара Алиева, 14,
+        предлагает изысканную атмосферу и безупречный сервис, чтобы наш день стал по-настоящему незабываемым.
+    </p>
+</div>
+
+<form data-animate-on-scroll>
+    <h2 id="rsvpHeading">Подтвердите ваше присутствие</h2>
+    <p id="rsvpText">
+        Мы очень ждем вас на нашем торжестве! Пожалуйста, подтвердите ваше участие,
+        чтобы мы могли учесть все детали и сделать праздник комфортным для каждого гостя.
+    </p>
+    <input type="text" id="guestName" placeholder="Введите ваши имя и фамилию" required>
+    <p id="attendanceQuestion">
+        Вы сможете присутствовать на нашей свадьбе?
+    </p>
+    <div class="radio-group">
+        <label><input type="radio" name="attendance" value="yes" id="attendanceYes" required><span id="yesText">Да, обязательно!</span></label>
+        <label><input type="radio" name="attendance" value="no" id="attendanceNo"><span id="noText">К сожалению, нет</span></label>
     </div>
-  </section>
+    <input type="submit" id="submitButton" value="Отправить">
+</form>
 
-  <section id="contact" style="max-width: 600px; margin: 60px auto 80px; padding: 0 20px;">
-    <h3>Свяжитесь с нами</h3>
-    <form>
-      <label for="name" style="display:block; margin-bottom: 8px; font-weight: 600;">Ваше имя</label>
-      <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;" />
-      
-      <label for="email" style="display:block; margin-bottom: 8px; font-weight: 600;">Email</label>
-      <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;" />
-      
-      <label for="message" style="display:block; margin-bottom: 8px; font-weight: 600;">Сообщение</label>
-      <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
-      
-      <button type="submit" class="btn-primary">Отправить</button>
-    </form>
-  </section>
+<footer data-animate-on-scroll>
+    <p id="footerCopy">&copy; 2031 Еркежан & Бекзат. Создано с любовью.</p>
+</footer>
 
-  <footer>
-    <p>© 2025 Banquet. Все права защищены.</p>
-  </footer>
+<script>
+    // Объект для переводов
+    const translations = {
+        ru: {
+            mainNames: "Еркежан <span>и</span> Бекзат",
+            dateAndLocation: "30 марта 2031, 16:00 | Hilton Astana, Астана",
+            countdownPrefix: "До свадьбы",
+            eventHappened: "Событие уже состоялось!",
+            invitationHeading: "Дорогие гости!",
+            invitationText: "Мы с огромной радостью приглашаем вас разделить с нами самый особенный день нашей жизни, день, когда наши сердца соединятся в единое целое.",
+            invitationMoreText: "Это будет начало нашей общей истории, наполненной любовью, счастьем и незабываемыми моментами. Ваше присутствие на этом празднике станет для нас самым ценным подарком!",
+            ourPhotosHeading: "Наши моменты",
+            ourPhotosText: "Взгляните на некоторые из наших любимых совместных фотографий, которые рассказывают историю нашей любви.",
+            venueHeading: "Место проведения",
+            venueText: "Наше торжество состоится в одном из самых престижных мест столицы — элегантном отеле Hilton Astana.",
+            hotelDescription: "Отель Hilton Astana, расположенный по адресу ул. Гейдара Алиева, 14, предлагает изысканную атмосферу и безупречный сервис, чтобы наш день стал по-настоящему незабываемым.",
+            rsvpHeading: "Подтвердите ваше присутствие",
+            rsvpText: "Мы очень ждем вас на нашем торжестве! Пожалуйста, подтвердите ваше участие, чтобы мы могли учесть все детали и сделать праздник комфортным для каждого гостя.",
+            guestNamePlaceholder: "Введите ваши имя и фамилию",
+            attendanceQuestion: "Вы сможете присутствовать на нашей свадьбе?",
+            yesText: "Да, обязательно!",
+            noText: "К сожалению, нет",
+            submitButton: "Отправить",
+            footerCopy: "&copy; 2031 Еркежан & Бекзат. Создано с любовью."
+        },
+        kz: {
+            mainNames: "Еркежан <span>мен</span> Бекзат",
+            dateAndLocation: "2031 жыл 30 наурыз, 16:00 | Hilton Astana, Астана",
+            countdownPrefix: "Үйлену тойына дейін",
+            eventHappened: "Іс-шара өтті!",
+            invitationHeading: "Құрметті қонақтар!",
+            invitationText: "Біз сіздерді өміріміздегі ең ерекше күнімізді, жүректеріміз бір бүтінге бірігетін күнді бізбен бірге бөлісуге қуана шақырамыз.",
+            invitationMoreText: "Бұл махаббатқа, бақытқа және ұмытылмас сәттерге толы ортақ тарихымыздың бастауы болады. Осы мерекедегі сіздің қатысуыңыз біз үшін ең құнды сыйлық болады!",
+            ourPhotosHeading: "Біздің сәттеріміз",
+            ourPhotosText: "Махаббат тарихымызды баяндайтын сүйікті ортақ фотосуреттеріміздің кейбірін қараңыз.",
+            venueHeading: "Өткізу орны",
+            venueText: "Біздің салтанатты мерекеміз елордамыздың ең беделді орындарының бірінде — талғампаз Hilton Astana қонақүйінде өтеді.",
+            hotelDescription: "Хилтон Астана қонақүйі, Ғайдар Алиев көшесі, 14 мекенжайында орналасқан, біздің күнімізді шынымен ұмытылмас ету үшін талғампаз атмосфера мен мінсіз қызмет көрсетеді.",
+            rsvpHeading: "Қатысуыңызды растаңыз",
+            rsvpText: "Біз сіздерді тойымызда асыға күтеміз! Әрбір қонаққа мерекені ыңғайлы ету үшін барлық егжей-тегжейлерді ескеруіміз үшін, қатысуыңызды растауыңызды сұраймыз.",
+            guestNamePlaceholder: "Аты-жөніңізді енгізіңіз",
+            attendanceQuestion: "Сіз біздің тойымызға қатыса аласыз ба?",
+            yesText: "Иә, міндетті түрде!",
+            noText: "Өкінішке орай, жоқ",
+            submitButton: "Жіберу",
+            footerCopy: "&copy; 2031 Еркежан & Бекзат. Сүйіспеншілікпен жасалған."
+        }
+    };
+
+    let currentLang = 'ru'; // По умолчанию русский
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+
+        // Header
+        document.getElementById('mainNames').innerHTML = t.mainNames;
+        document.getElementById('dateAndLocation').innerText = t.dateAndLocation;
+
+        // Info sections
+        document.getElementById('invitationHeading').innerText = t.invitationHeading;
+        document.getElementById('invitationText').innerText = t.invitationText;
+        document.getElementById('invitationMoreText').innerText = t.invitationMoreText;
+
+        document.getElementById('ourPhotosHeading').innerText = t.ourPhotosHeading;
+        document.getElementById('ourPhotosText').innerText = t.ourPhotosText;
+
+        document.getElementById('venueHeading').innerText = t.venueHeading;
+        document.getElementById('venueText').innerText = t.venueText;
+        document.getElementById('hotelDescription').innerText = t.hotelDescription;
+
+        // Form
+        document.getElementById('rsvpHeading').innerText = t.rsvpHeading;
+        document.getElementById('rsvpText').innerText = t.rsvpText;
+        document.getElementById('guestName').placeholder = t.guestNamePlaceholder;
+        document.getElementById('attendanceQuestion').innerText = t.attendanceQuestion;
+        document.getElementById('yesText').innerText = t.yesText;
+        document.getElementById('noText').innerText = t.noText;
+        document.getElementById('submitButton').value = t.submitButton;
+
+        // Footer
+        document.getElementById('footerCopy').innerHTML = t.footerCopy;
+
+        updateCountdownDisplay(); // Обновить таймер после смены языка
+    }
+
+    function updateCountdownDisplay() {
+        const weddingDate = new Date("2031-03-30T16:00:00").getTime();
+        const countdownEl = document.getElementById('countdown');
+        const d = weddingDate - Date.now();
+        const t = translations[currentLang];
+
+        if (d <= 0) {
+            countdownEl.innerText = t.eventHappened;
+            return;
+        }
+
+        const days = Math.floor(d / (1000 * 60 * 60 * 24));
+        const hrs = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((d % (1000 * 60)) / 1000);
+
+        countdownEl.innerText = `${t.countdownPrefix} ${days}д ${hrs}ч ${mins}м ${secs}с`;
+    }
+
+    // Запускаем отсчет при загрузке страницы
+    startCountdown();
+    setInterval(updateCountdownDisplay, 1000);
+
+
+    // Intersection Observer для анимации появления при скролле
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // Элемент появляется, когда 10% его видно
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Прекратить наблюдение после анимации
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-animate-on-scroll]').forEach(element => {
+        observer.observe(element);
+    });
+
+    // Установить язык по умолчанию при загрузке страницы
+    document.addEventListener('DOMContentLoaded', () => {
+        setLanguage('ru');
+    });
+</script>
 </body>
 </html>
-
