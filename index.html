@@ -1,665 +1,211 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Свадьба Еркежан и Бекзат</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<style>
-    /* Global Resets and Base Styles */
-    *, *::before, *::after {
-        box-sizing: border-box;
-    }
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Свадьба Еркежан и Бекзат</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
     body {
-        margin: 0;
-        font-family: 'Montserrat', sans-serif;
-        background: linear-gradient(135deg, #e0e9fa, #f8eafc); /* Нежный сиренево-голубой градиент, как на скринах */
-        color: #333;
-        text-align: center;
-        overflow-x: hidden; /* Prevent horizontal scroll */
-        position: relative; /* For z-index context */
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
     }
-
-    /* Starry Background */
     .stars-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(ellipse at bottom, #1a1a2e 0%, #0d0d1a 100%); /* Глубокий темный фон */
-        overflow: hidden;
-        z-index: -2; /* Ensure it's behind everything */
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow: hidden;
     }
-
     .star {
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.8);
-        border-radius: 50%;
-        animation: twinkle linear infinite;
-        opacity: 0;
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle infinite alternate;
     }
-
     @keyframes twinkle {
-        0%, 100% { opacity: 0; transform: scale(0.5); }
-        50% { opacity: 1; transform: scale(1); }
+      from { opacity: 0.2; }
+      to { opacity: 1; }
     }
-
-    /* Background "Planets/Circles" - Adjust colors for harmony */
-    .bg-circle {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.3;
-        filter: blur(80px); /* Stronger blur for soft appearance */
-        z-index: -1; /* Behind content, in front of stars */
-    }
-    .bg-circle.one {
-        width: 350px; height: 350px;
-        background: #a98dff; /* Light purple */
-        top: 15%; left: -10%;
-        animation: floatOne 20s infinite ease-in-out;
-    }
-    .bg-circle.two {
-        width: 300px; height: 300px;
-        background: #ffacef; /* Light pink */
-        top: 45%; right: -15%;
-        animation: floatTwo 22s infinite ease-in-out;
-    }
-    .bg-circle.three {
-        width: 400px; height: 400px;
-        background: #c3d9ff; /* Light blue */
-        bottom: 10%; left: 10%;
-        animation: floatThree 25s infinite ease-in-out;
-    }
-
-    @keyframes floatOne {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(30px, 40px); }
-    }
-    @keyframes floatTwo {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(-35px, -30px); }
-    }
-    @keyframes floatThree {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(25px, -35px); }
-    }
-
-    /* Header Section (Names, Date, Countdown) */
     header {
-        padding: 80px 20px 60px;
-        position: relative;
-        z-index: 1; /* Ensure header is on top */
-        /* background: radial-gradient(circle at top center, rgba(162, 117, 204, 0.1) 0%, rgba(255, 255, 255, 0) 70%); /* Lighter subtle glow */
+      text-align: center;
+      padding: 100px 20px 40px;
     }
-
-    .language-switcher {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        z-index: 10;
-    }
-    .language-switcher button {
-        margin: 0 5px;
-        padding: 8px 15px;
-        border: none;
-        background: rgba(255,255,255,0.7);
-        border-radius: 25px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: background .3s, transform .1s;
-        color: #7a42a0; /* Darker purple for text */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .language-switcher button:hover {
-        background: rgba(255,255,255,0.9); /* Slightly more opaque on hover */
-        transform: translateY(-1px);
-    }
-
     .names-heading {
-        font-family: 'Great Vibes', cursive;
-        font-size: 5.5em;
-        color: #b768d8; /* Bright, soft purple */
-        margin: 0;
-        text-shadow: 0 5px 15px rgba(0,0,0,0.25);
-        line-height: 1.1;
+      font-family: 'Great Vibes', cursive;
+      font-size: 60px;
+      margin-bottom: 10px;
     }
     .names-heading span {
-        font-family: 'Great Vibes', cursive; /* Ensure consistency */
-        color: #ffe0f0; /* Lighter accent for "и" */
+      font-family: 'Playfair Display', serif;
     }
-
     .header-info {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.2em;
-        margin-top: 20px;
-        color: #ddd; /* Lighter color for text on dark background */
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
     }
     .countdown {
-        font-size: 1.8em;
-        margin-top: 25px;
-        color: #d8b7ff; /* Lighter purple for countdown */
-        font-weight: 600;
-        text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 500;
     }
-
-    /* Content Sections (no explicit borders, soft shadows) */
     .content-section {
-        background: rgba(255, 255, 255, 0.95); /* Slightly less transparent */
-        max-width: 800px;
-        margin: 50px auto; /* Consistent margin */
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* More prominent shadow */
-        position: relative;
-        z-index: 1; /* Ensure content is on top of background elements */
-
-        /* Animation properties */
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Separate transitions */
+      padding: 60px 20px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
     }
-
     .content-section.is-visible {
-        opacity: 1;
-        transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    .content-section h2, .content-section .script-heading {
-        font-family: 'Playfair Display', serif; /* Or 'Bad Script' for specific headings */
-        font-size: 2.8em;
-        color: #7a42a0; /* Deeper purple for headings */
-        margin-bottom: 25px;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    }
-    .content-section .script-heading {
-        font-family: 'Great Vibes', cursive; /* For specific script headings */
-        font-size: 3.2em;
-        color: #b768d8;
-    }
-
-    .content-section p {
-        font-size: 1.1em;
-        line-height: 1.7;
-        color: #555;
-        margin-bottom: 20px;
-    }
-    .content-section p:last-child {
-        margin-bottom: 0;
-    }
-
-    .highlight-number-block {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 30px 0;
-    }
-    .highlight-number {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
-        font-size: 4em; /* Larger for numbers */
-        color: #ff8df1; /* Bright pink accent */
-        margin: 0;
-        line-height: 1;
-        text-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .highlight-unit {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 500;
-        font-size: 1.5em;
-        color: #666;
-        margin-top: 10px;
-    }
-
-    /* Photo Gallery */
     .photo-gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
     }
     .photo-gallery img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 250px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
-    .photo-gallery img:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-    }
-
-    /* Hotel Section */
     .hotel-section img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        margin-top: 30px;
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      margin-top: 1rem;
     }
-
-    /* RSVP Form */
     form {
-        max-width: 600px;
-        margin: 50px auto 80px;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.98);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        position: relative;
-        z-index: 1; /* Ensure form is on top */
-
-        /* Animation properties */
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      padding: 60px 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
-    form.is-visible {
-        opacity: 1;
-        transform: translateY(0);
+    form input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
     }
-
-    form .script-heading { /* Specific style for form heading */
-        font-family: 'Playfair Display', serif; /* Or 'Great Vibes' if preferred for form */
-        font-size: 2.5em; /* Slightly smaller than main content headings */
-        color: #7a42a0;
-        margin-bottom: 25px;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    }
-
-    input[type=text] {
-        width: calc(100% - 20px); /* Account for padding */
-        padding: 15px 10px;
-        margin-bottom: 25px;
-        border-radius: 10px;
-        border: 1px solid #dcdcdc;
-        font-size: 1.1em;
-        font-family: 'Montserrat', sans-serif;
-        background: #fdfdff;
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    input[type=text]:focus {
-        border-color: #a275d0;
-        box-shadow: 0 0 0 3px rgba(162, 117, 204, 0.1);
-        outline: none;
-    }
-
     .radio-group {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        margin-bottom: 30px;
-        flex-wrap: wrap; /* Allow wrapping on small screens */
+      margin: 15px 0;
     }
     .radio-group label {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 1.1em;
-        color: #555;
-        cursor: pointer;
+      margin: 0 10px;
     }
-    .radio-group input[type=radio] {
-        accent-color: #7a42a0;
-        width: 20px;
-        height: 20px;
+    form input[type="submit"] {
+      padding: 12px 24px;
+      background: #ffffff;
+      color: #000;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.3s ease;
     }
-
-    input[type=submit] {
-        background-color: #7a42a0;
-        color: #fff;
-        border: none;
-        padding: 16px 35px;
-        font-size: 1.15em;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: background .3s, transform .2s, box-shadow 0.3s;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        box-shadow: 0 5px 15px rgba(122, 66, 160, 0.3);
+    form input[type="submit"]:hover {
+      background: #dddddd;
     }
-    input[type=submit]:hover {
-        background-color: #6a3690;
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(122, 66, 160, 0.4);
-    }
-
     footer {
-        margin: 60px 0 40px;
-        color: #888;
-        font-size: 0.9em;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.8s ease-out;
-        z-index: 1;
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 14px;
     }
-    footer.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-        .names-heading { font-size: 4em; }
-        .countdown { font-size: 1.5em; }
-        .content-section, form {
-            margin: 40px 20px;
-            padding: 30px;
-        }
-        .photo-gallery {
-            grid-template-columns: 1fr; /* Single column on smaller screens */
-            gap: 20px;
-        }
-        .photo-gallery img { height: 250px; }
-        .content-section h2, .content-section .script-heading { font-size: 2.2em; }
-        form .script-heading { font-size: 1.8em; }
-        input[type=text], input[type=submit] { font-size: 1em; padding: 12px 8px; }
-        .radio-group { flex-direction: column; gap: 15px; }
-    }
-
-    @media (max-width: 480px) {
-        header { padding: 60px 10px 40px; }
-        .names-heading { font-size: 3em; }
-        .header-info { font-size: 1em; }
-        .countdown { font-size: 1.2em; }
-        .content-section, form { padding: 25px 15px; margin: 30px 15px; }
-        .content-section h2, .content-section .script-heading { font-size: 2em; }
-        form .script-heading { font-size: 1.6em; }
-        .language-switcher { top: 10px; right: 10px; }
-        .language-switcher button { padding: 6px 10px; font-size: 0.8em; }
-    }
-</style>
+  </style>
 </head>
 <body>
+  <div class="stars-background" id="starsBackground"></div>
 
-<div class="stars-background" id="starsBackground"></div>
-
-<div class="bg-circle one"></div>
-<div class="bg-circle two"></div>
-<div class="bg-circle three"></div>
-
-<script>
-    // Star creation
-    const starsBackground = document.getElementById('starsBackground');
-    for (let i = 0; i < 200; i++) { // More stars for a fuller effect
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.width = star.style.height = `${Math.random() * 2 + 1}px`; // Size from 1px to 3px
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.top = `${Math.random() * 100}vh`;
-        star.style.animationDelay = `${Math.random() * 5}s`;
-        star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-        starsBackground.appendChild(star);
-    }
-</script>
-
-<header>
-    <div class="language-switcher">
-        <button onclick="setLanguage('ru')">Русский</button>
-        <button onclick="setLanguage('kz')">Қазақша</button>
-    </div>
-    <h1 class="names-heading" id="mainNames">Еркежан <span>и</span> Бекзат</h1>
-    <p class="header-info" id="dateAndLocation">30 марта 2031, 16:00 | Hilton Astana, Астана</p>
+  <header>
+    <h1 class="names-heading">Еркежан <span>&</span> Бекзат</h1>
+    <p class="header-info">Мы приглашаем вас отпраздновать начало нашей вечности вместе</p>
     <div class="countdown" id="countdown"></div>
-</header>
+  </header>
 
-<div class="content-section" data-animate-on-scroll>
-    <h2 id="invitationHeading">Дорогие гости!</h2>
-    <p id="invitationText">
-        Мы с огромной радостью приглашаем вас разделить с нами самый особенный день нашей жизни,
-        день, когда наши сердца соединятся в единое целое.
-    </p>
-    <p id="invitationMoreText">
-        Это будет начало нашей общей истории, наполненной любовью, счастьем и незабываемыми моментами.
-        Ваше присутствие на этом празднике станет для нас самым ценным подарком!
-    </p>
-</div>
-
-<div class="content-section" data-animate-on-scroll>
-    <h2 class="script-heading" id="taimasHeading">Таймас</h2>
-    <div class="highlight-number-block">
-        <span class="highlight-number">1</span>
-        <span class="highlight-unit" id="yearUnit">год</span>
-    </div>
-
-    <h2 class="script-heading" id="elisarHeading">Элисар</h2>
-    <div class="highlight-number-block">
-        <span class="highlight-number">40</span>
-        <span class="highlight-unit" id="daysUnit">дней</span>
-    </div>
-</div>
-
-<div class="content-section" data-animate-on-scroll>
-    <h2 class="script-heading" id="shildehanaHeading">Шилдехана</h2>
-    <p id="shildehanaText">
-        В тот же день мы будем праздновать "Шилдехана" нашего младшего сыночка Элисара,
-        отмечая 40 дней с момента его рождения!
-    </p>
-    <p id="newStageText">
-        Этот день станет символом начала нового этапа в жизни наших сыновей,
-        наполненного надеждами и мечтами.
-    </p>
-</div>
-
-<div class="content-section" data-animate-on-scroll>
-    <h2 id="ourPhotosHeading">Наши моменты</h2>
-    <p id="ourPhotosText">
-        Взгляните на некоторые из наших любимых совместных фотографий,
-        которые рассказывают историю нашей любви.
-    </p>
+  <section class="content-section">
+    <h2>Наша история</h2>
     <div class="photo-gallery">
-        <img src="https://via.placeholder.com/400x300/f0e0f8/8a42a0?text=Еркежан+и+Бекзат+1" alt="Еркежан и Бекзат 1">
-        <img src="https://via.placeholder.com/400x300/e0f0f8/8a42a0?text=Еркежан+и+Бекзат+2" alt="Еркежан и Бекзат 2">
-        <img src="https://via.placeholder.com/400x300/f8e0f0/8a42a0?text=Еркежан+и+Бекзат+3" alt="Еркежан и Бекзат 3">
-        <img src="https://via.placeholder.com/400x300/e0f8f0/8a42a0?text=Еркежан+и+Бекзат+4" alt="Еркежан и Бекзат 4">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Пара 1">
+      <img src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7" alt="Пара 2">
+      <img src="https://images.unsplash.com/photo-1530023367847-a683933f4175" alt="Пара 3">
     </div>
-</div>
+  </section>
 
-<div class="content-section hotel-section" data-animate-on-scroll>
-    <h2 id="venueHeading">Место проведения</h2>
-    <p id="venueText">
-        Наше торжество состоится в одном из самых престижных мест столицы —
-        элегантном отеле Hilton Astana.
-    </p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Hilton_Hotel_Astana_-_ panoramio_%281%29.jpg/1200px-Hilton_Hotel_Astana_-_ panoramio_%281%29.jpg" alt="Hilton Astana" id="hotelPhoto">
-    <p id="hotelDescription">
-        Отель Hilton Astana, расположенный по адресу ул. Гейдара Алиева, 14,
-        предлагает изысканную атмосферу и безупречный сервис, чтобы наш день стал по-настоящему незабываемым.
-    </p>
-</div>
+  <section class="content-section hotel-section">
+    <h2>Торжество</h2>
+    <p>Церемония и банкет пройдут в самом сердце столицы — отеле <strong>Hilton Hotel, Астана</strong>.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Hilton_Astana.jpg/800px-Hilton_Astana.jpg" alt="Hilton Astana Hotel">
+  </section>
 
-<form data-animate-on-scroll>
-    <h2 class="script-heading" id="rsvpHeading">Ждём вас</h2>
-    <p id="rsvpText">
-        Мы очень ждем вас на нашем торжестве! Пожалуйста, подтвердите ваше участие,
-        чтобы мы могли учесть все детали и сделать праздник комфортным для каждого гостя.
-    </p>
-    <input type="text" id="guestName" placeholder="Введите ваши имя и фамилию" required>
-    <p id="attendanceQuestion">
-        Вы сможете присутствовать на нашей свадьбе?
-    </p>
+  <form id="rsvp-form">
+    <h2>Вы с нами?</h2>
+    <input type="text" placeholder="Ваше имя" name="name" required>
     <div class="radio-group">
-        <label><input type="radio" name="attendance" value="yes" id="attendanceYes" required><span id="yesText">Да, обязательно!</span></label>
-        <label><input type="radio" name="attendance" value="no" id="attendanceNo"><span id="noText">К сожалению, нет</span></label>
+      <label><input type="radio" name="attendance" value="yes" required> Приду</label>
+      <label><input type="radio" name="attendance" value="no"> Не смогу</label>
     </div>
-    <input type="submit" id="submitButton" value="Отправить">
-</form>
+    <input type="submit" value="Отправить приглашение">
+  </form>
 
-<footer data-animate-on-scroll>
-    <p id="footerCopy">&copy; 2031 Еркежан & Бекзат. Создано с любовью.</p>
-</footer>
+  <footer>
+    &copy; 2031 Еркежан и Бекзат. Все права защищены.
+  </footer>
 
-<script>
-    // Объект для переводов
-    const translations = {
-        ru: {
-            mainNames: "Еркежан <span>и</span> Бекзат",
-            dateAndLocation: "30 марта 2031, 16:00 | Hilton Astana, Астана",
-            countdownPrefix: "До свадьбы",
-            eventHappened: "Событие уже состоялось!",
-            invitationHeading: "Дорогие гости!",
-            invitationText: "Мы с огромной радостью приглашаем вас разделить с нами самый особенный день нашей жизни, день, когда наши сердца соединятся в единое целое.",
-            invitationMoreText: "Это будет начало нашей общей истории, наполненной любовью, счастьем и незабываемыми моментами. Ваше присутствие на этом празднике станет для нас самым ценным подарком!",
-            taimasHeading: "Таймас",
-            yearUnit: "год",
-            elisarHeading: "Элисар",
-            daysUnit: "дней",
-            shildehanaHeading: "Шилдехана",
-            shildehanaText: "В тот же день мы будем праздновать 'Шилдехана' нашего младшего сыночка Элисара, отмечая 40 дней с момента его рождения!",
-            newStageText: "Этот день станет символом начала нового этапа в жизни наших сыновей, наполненного надеждами и мечтами.",
-            ourPhotosHeading: "Наши моменты",
-            ourPhotosText: "Взгляните на некоторые из наших любимых совместных фотографий, которые рассказывают историю нашей любви.",
-            venueHeading: "Место проведения",
-            venueText: "Наше торжество состоится в одном из самых престижных мест столицы — элегантном отеле Hilton Astana.",
-            hotelDescription: "Отель Hilton Astana, расположенный по адресу ул. Гейдара Алиева, 14, предлагает изысканную атмосферу и безупречный сервис, чтобы наш день стал по-настоящему незабываемым.",
-            rsvpHeading: "Ждём вас", // Changed to "Ждём вас" as per your screenshot
-            rsvpText: "Мы очень ждем вас на нашем торжестве! Пожалуйста, подтвердите ваше участие, чтобы мы могли учесть все детали и сделать праздник комфортным для каждого гостя.",
-            guestNamePlaceholder: "Введите ваши имя и фамилию",
-            attendanceQuestion: "Вы сможете присутствовать на нашей свадьбе?",
-            yesText: "Да, обязательно!",
-            noText: "К сожалению, нет",
-            submitButton: "Отправить",
-            footerCopy: "&copy; 2031 Еркежан & Бекзат. Создано с любовью."
-        },
-        kz: {
-            mainNames: "Еркежан <span>мен</span> Бекзат",
-            dateAndLocation: "2031 жыл 30 наурыз, 16:00 | Hilton Astana, Астана",
-            countdownPrefix: "Үйлену тойына дейін",
-            eventHappened: "Іс-шара өтті!",
-            invitationHeading: "Құрметті қонақтар!",
-            invitationText: "Біз сіздерді өміріміздегі ең ерекше күнімізді, жүректеріміз бір бүтінге бірігетін күнді бізбен бірге бөлісуге қуана шақырамыз.",
-            invitationMoreText: "Бұл махаббатқа, бақытқа және ұмытылмас сәттерге толы ортақ тарихымыздың бастауы болады. Осы мерекедегі сіздің қатысуыңыз біз үшін ең құнды сыйлық болады!",
-            taimasHeading: "Таймас",
-            yearUnit: "жас",
-            elisarHeading: "Элисар",
-            daysUnit: "күн",
-            shildehanaHeading: "Шілдехана",
-            shildehanaText: "Дәл сол күні біз кіші ұлымыз Элисардың дүниеге келгеніне 40 күн толғанын атап өтіп, 'Шілдехана' тойын тойлаймыз!",
-            newStageText: "Бұл күн ұлдарымыздың үміт пен арманға толы өміріндегі жаңа кезеңнің символы болады.",
-            ourPhotosHeading: "Біздің сәттеріміз",
-            ourPhotosText: "Махаббат тарихымызды баяндайтын сүйікті ортақ фотосуреттеріміздің кейбірін қараңыз.",
-            venueHeading: "Өткізу орны",
-            venueText: "Біздің салтанатты мерекеміз елордамыздың ең беделді орындарының бірінде — талғампаз Hilton Astana қонақүйінде өтеді.",
-            hotelDescription: "Хилтон Астана қонақүйі, Ғайдар Алиев көшесі, 14 мекенжайында орналасқан, біздің күнімізді шынымен ұмытылмас ету үшін талғампаз атмосфера мен мінсіз қызмет көрсетеді.",
-            rsvpHeading: "Сіздерді күтеміз", // Changed to Kazakh version
-            rsvpText: "Біз сіздерді тойымызда асыға күтеміз! Әрбір қонаққа мерекені ыңғайлы ету үшін барлық егжей-тегжейлерді ескеруіміз үшін, қатысуыңызды растауыңызды сұраймыз.",
-            guestNamePlaceholder: "Аты-жөніңізді енгізіңіз",
-            attendanceQuestion: "Сіз біздің тойымызға қатыса аласыз ба?",
-            yesText: "Иә, міндетті түрде!",
-            noText: "Өкінішке орай, жоқ",
-            submitButton: "Жіберу",
-            footerCopy: "&copy; 2031 Еркежан & Бекзат. Сүйіспеншілікпен жасалған."
+  <script>
+    const starsBackground = document.getElementById('starsBackground');
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = star.style.height = `${Math.random() * 2 + 1}px`;
+      star.style.left = `${Math.random() * 100}vw`;
+      star.style.top = `${Math.random() * 100}vh`;
+      star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      star.style.animationDelay = `${Math.random() * 5}s`;
+      starsBackground.appendChild(star);
+    }
+
+    const countdownEl = document.getElementById("countdown");
+    const weddingDate = new Date("2031-07-01T00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+      if (distance <= 0) {
+        countdownEl.innerHTML = "Свадьба уже началась!";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownEl.innerHTML = `Осталось: ${days}д ${hours}ч ${minutes}м ${seconds}с`;
+    }, 1000);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
         }
-    };
+      });
+    }, { threshold: 0.2 });
 
-    let currentLang = 'ru'; // По умолчанию русский
-
-    function setLanguage(lang) {
-        currentLang = lang;
-        const t = translations[lang];
-
-        // Header
-        document.getElementById('mainNames').innerHTML = t.mainNames;
-        document.getElementById('dateAndLocation').innerText = t.dateAndLocation;
-
-        // Info sections
-        if (document.getElementById('invitationHeading')) document.getElementById('invitationHeading').innerText = t.invitationHeading;
-        if (document.getElementById('invitationText')) document.getElementById('invitationText').innerText = t.invitationText;
-        if (document.getElementById('invitationMoreText')) document.getElementById('invitationMoreText').innerText = t.invitationMoreText;
-
-        // Taimas & Elisar
-        if (document.getElementById('taimasHeading')) document.getElementById('taimasHeading').innerText = t.taimasHeading;
-        if (document.getElementById('yearUnit')) document.getElementById('yearUnit').innerText = t.yearUnit;
-        if (document.getElementById('elisarHeading')) document.getElementById('elisarHeading').innerText = t.elisarHeading;
-        if (document.getElementById('daysUnit')) document.getElementById('daysUnit').innerText = t.daysUnit;
-
-        // Shildehana
-        if (document.getElementById('shildehanaHeading')) document.getElementById('shildehanaHeading').innerText = t.shildehanaHeading;
-        if (document.getElementById('shildehanaText')) document.getElementById('shildehanaText').innerText = t.shildehanaText;
-        if (document.getElementById('newStageText')) document.getElementById('newStageText').innerText = t.newStageText;
-
-        // Our Photos
-        if (document.getElementById('ourPhotosHeading')) document.getElementById('ourPhotosHeading').innerText = t.ourPhotosHeading;
-        if (document.getElementById('ourPhotosText')) document.getElementById('ourPhotosText').innerText = t.ourPhotosText;
-
-        // Venue
-        if (document.getElementById('venueHeading')) document.getElementById('venueHeading').innerText = t.venueHeading;
-        if (document.getElementById('venueText')) document.getElementById('venueText').innerText = t.venueText;
-        if (document.getElementById('hotelDescription')) document.getElementById('hotelDescription').innerText = t.hotelDescription;
-
-        // Form
-        if (document.getElementById('rsvpHeading')) document.getElementById('rsvpHeading').innerText = t.rsvpHeading;
-        if (document.getElementById('rsvpText')) document.getElementById('rsvpText').innerText = t.rsvpText;
-        if (document.getElementById('guestName')) document.getElementById('guestName').placeholder = t.guestNamePlaceholder;
-        if (document.getElementById('attendanceQuestion')) document.getElementById('attendanceQuestion').innerText = t.attendanceQuestion;
-        if (document.getElementById('yesText')) document.getElementById('yesText').innerText = t.yesText;
-        if (document.getElementById('noText')) document.getElementById('noText').innerText = t.noText;
-        if (document.getElementById('submitButton')) document.getElementById('submitButton').value = t.submitButton;
-
-        // Footer
-        if (document.getElementById('footerCopy')) document.getElementById('footerCopy').innerHTML = t.footerCopy;
-
-        updateCountdownDisplay();
-    }
-
-    // Countdown logic
-    function updateCountdownDisplay() {
-        const weddingDate = new Date("2031-03-30T16:00:00").getTime();
-        const countdownEl = document.getElementById('countdown');
-        const d = weddingDate - Date.now();
-        const t = translations[currentLang];
-
-        if (d <= 0) {
-            countdownEl.innerText = t.eventHappened;
-            return;
-        }
-
-        const days = Math.floor(d / (1000 * 60 * 60 * 24));
-        const hrs = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((d % (1000 * 60)) / 1000);
-
-        countdownEl.innerText = `${t.countdownPrefix} ${days}д ${hrs}ч ${mins}м ${secs}с`;
-    }
-
-    // Initialize countdown
-    startCountdown();
-    setInterval(updateCountdownDisplay, 1000);
-
-    function startCountdown() {
-        updateCountdownDisplay(); // Initial call to display immediately
-        // The setInterval is outside this function now to avoid multiple intervals
-    }
-
-
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1 // Element becomes visible when 10% is in viewport
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Stop observing once visible
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('[data-animate-on-scroll]').forEach(element => {
-        observer.observe(element);
+    document.querySelectorAll('.content-section, form, footer').forEach(section => {
+      observer.observe(section);
     });
-
-    // Set default language on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        setLanguage('ru');
-    });
-</script>
+  </script>
 </body>
 </html>
