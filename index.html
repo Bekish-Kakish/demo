@@ -13,17 +13,33 @@
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: #000;
+      background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
       color: #fff;
       overflow-x: hidden;
       position: relative;
     }
 
-    canvas {
+    .stars {
       position: fixed;
-      top: 0;
-      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       z-index: 0;
+    }
+
+    .stars::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/vkDbWnG/stars.png') repeat;
+      animation: twinkling 200s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes twinkling {
+      from {background-position: 0 0;}
+      to {background-position: -10000px 5000px;}
     }
 
     header, .content-section, footer {
@@ -174,7 +190,7 @@
   </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
+  <div class="stars"></div>
 
   <audio id="bg-music" autoplay loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_54f3fb041e.mp3?filename=wedding-dreams-121275.mp3" type="audio/mpeg">
@@ -219,7 +235,6 @@
   </footer>
 
   <script>
-    // Обратный отсчёт
     document.addEventListener('DOMContentLoaded', function () {
       const countdown = document.getElementById('countdown');
       const weddingDate = new Date('2025-07-20T18:00:00');
@@ -244,7 +259,6 @@
       updateCountdown();
       setInterval(updateCountdown, 1000);
 
-      // RSVP
       const form = document.getElementById('rsvp-form');
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -260,72 +274,11 @@
         form.reset();
       });
 
-      // Музыка запускается при первом клике
       document.body.addEventListener('click', () => {
         const audio = document.getElementById('bg-music');
         if (audio.paused) audio.play();
       }, { once: true });
     });
-
-    // Анимированные звёзды
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let width, height, stars = [];
-
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-
-    function createStars(count) {
-      stars = [];
-      for (let i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          r: Math.random() * 1.5 + 0.5,
-          dx: (Math.random() - 0.5) * 0.5,
-          dy: (Math.random() - 0.5) * 0.5,
-          opacity: Math.random()
-        });
-      }
-    }
-
-    function drawStars() {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = "#ffffff";
-      stars.forEach(star => {
-        ctx.globalAlpha = star.opacity;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-    }
-
-    function updateStars() {
-      stars.forEach(star => {
-        star.x += star.dx;
-        star.y += star.dy;
-        if (star.x < 0 || star.x > width) star.dx *= -1;
-        if (star.y < 0 || star.y > height) star.dy *= -1;
-        star.opacity = 0.5 + Math.sin(Date.now() * 0.002 + star.x) * 0.5;
-      });
-    }
-
-    function animate() {
-      drawStars();
-      updateStars();
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', () => {
-      resize();
-      createStars(200);
-    });
-
-    resize();
-    createStars(200);
-    animate();
   </script>
 </body>
 </html>
