@@ -16,7 +16,6 @@
       position: relative;
       min-height: 100vh;
     }
-    /* Контейнер для звезд */
     .stars {
       position: fixed;
       width: 100vw;
@@ -28,7 +27,6 @@
       overflow: hidden;
       background: transparent;
     }
-    /* Звезда */
     .star {
       position: absolute;
       background: white;
@@ -94,6 +92,13 @@
       transition: transform 0.4s ease;
     }
     .photo-gallery img:hover { transform: scale(1.05); }
+    .description-text {
+      max-width: 800px;
+      margin: 30px auto 0;
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.6;
+    }
     .hotel-section img {
       max-width: 90%;
       border-radius: 20px;
@@ -178,12 +183,18 @@
       <img src="1.png" alt="Еркежан и Бекзат" />
       <img src="2.png" alt="Еркежан и Бекзат" />
     </div>
+    <div class="description-text">
+      Наша история началась с дружбы, которая со временем превратилась в нечто большее. Мы смеялись, поддерживали друг друга и стали командой, которой не страшны ни расстояния, ни трудности. Мы верим, что любовь — это не только чувства, но и ежедневный выбор быть рядом. И мы выбрали друг друга навсегда. ❤️
+    </div>
   </section>
 
   <section class="content-section hotel-section">
     <h2>Место проведения</h2>
     <p>Hilton Astana, Ул. Гейдара Алиева, 14</p>
     <img src="3.png" alt="Hilton Astana" />
+    <div class="description-text">
+      Мы с нетерпением ждём этот особенный день, чтобы разделить его с самыми дорогими сердцу людьми. Ваша поддержка и присутствие сделают нашу свадьбу по-настоящему незабываемой. Приходите, чтобы разделить с нами радость, смех и счастливые моменты, которые запомнятся на всю жизнь!
+    </div>
   </section>
 
   <section class="content-section">
@@ -203,14 +214,13 @@
   </footer>
 
   <script>
-    // Создаем звезды динамически
     const starsContainer = document.getElementById('stars');
     const starCount = 150;
 
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
-      const size = Math.random() * 2 + 1; // от 1 до 3 px
+      const size = Math.random() * 2 + 1;
       star.style.width = size + 'px';
       star.style.height = size + 'px';
       star.style.top = Math.random() * 100 + 'vh';
@@ -221,7 +231,6 @@
       starsContainer.appendChild(star);
     }
 
-    // Обновление таймера обратного отсчёта
     const countdown = document.getElementById('countdown');
     const weddingDate = new Date('2031-03-30T16:00:00');
 
@@ -242,7 +251,6 @@
     updateCountdown();
     const intervalId = setInterval(updateCountdown, 1000);
 
-    // Обработка формы RSVP
     document.getElementById('rsvp-form').addEventListener('submit', e => {
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
@@ -259,7 +267,6 @@
       e.target.reset();
     });
 
-    // Включение музыки по клику (автоплей может блокироваться)
     document.body.addEventListener('click', () => {
       const audio = document.getElementById('bg-music');
       if (audio.paused) audio.play();
