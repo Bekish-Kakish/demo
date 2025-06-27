@@ -1,412 +1,273 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Свадьба Еркежан и Бекзат</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
-    <style>
-        /* Общие стили и сбросы */
-        * {
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Приглашение на свадьбу</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #0a0a0a; /* Темный фон для звездного неба */
-            color: #e0e0e0; /* Светлый текст по умолчанию */
-            overflow-x: hidden;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-        /* Звездный фон - переработано для более мягкого свечения и цвета */
-        .stars-background {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            top: 0;
-            left: 0;
-            z-index: -2; /* Убедимся, что фон сзади */
-            background: radial-gradient(ellipse at bottom, #1a0a2e 0%, #0a040f 100%); /* Глубокий фиолетово-темный */
-            overflow: hidden;
-        }
+    .stars-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(white 1px, transparent 1px),
+                        radial-gradient(white 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.15;
+      z-index: 0;
+    }
 
-        .star {
-            position: absolute;
-            background: #ffecf2; /* Очень нежно-розовый для звезд */
-            border-radius: 50%;
-            opacity: 0.7; /* Более мягкая непрозрачность */
-            animation: twinkle infinite alternate;
-            box-shadow: 0 0 5px 1px rgba(255, 236, 242, 0.7); /* Мягкое свечение */
-        }
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-        @keyframes twinkle {
-            from { opacity: 0.1; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1.2); }
-        }
+    .names-heading {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      color: #ffc9de;
+    }
 
-        /* Header - без розовой рамки, прозрачный фон с эффектом свечения */
-        header {
-            text-align: center;
-            padding: 120px 20px 60px;
-            background: transparent; /* Прозрачный фон */
-            position: relative;
-            z-index: 1;
-            /* Уберем border-radius и box-shadow, они больше не нужны для header */
-        }
+    .names-heading span {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #fff;
+    }
 
-        /* Имена - только они розовые, с градиентом */
-        .names-heading {
-            font-family: 'Great Vibes', cursive;
-            font-size: 72px;
-            margin-bottom: 12px;
-            background: linear-gradient(45deg, #ff6fa3, #ff9ec4); /* Яркий, но приятный розовый градиент */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 111, 163, 0.7); /* Сильное, но мягкое свечение */
-        }
+    .header-info, .invitation-text {
+      font-size: 1.2rem;
+      color: #ddd;
+      margin-bottom: 15px;
+      animation: fadeInUp 2s ease-in-out;
+    }
 
-        .names-heading span {
-            font-family: 'Playfair Display', serif; /* Для "и" или "&" */
-            font-weight: 700;
-            font-size: 72px;
-            margin: 0 15px;
-            color: #ff9ec4; /* Чуть светлее розовый для символа */
-            text-shadow: 0 0 8px rgba(255, 111, 163, 0.9);
-        }
+    .countdown {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffc9de;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-        .header-info {
-            font-size: 20px;
-            max-width: 650px;
-            margin: 0 auto 15px;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            color: #d0d0d0; /* Более мягкий белый */
-            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-        }
+    .content-section {
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
 
-        .invitation-text {
-            max-width: 600px;
-            margin: 0 auto 40px;
-            font-size: 18px;
-            font-style: italic;
-            color: #b0b0b0; /* Более приглушенный цвет для цитаты */
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
+    .content-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
 
-        /* Счётчик - более элегантные цвета */
-        .countdown {
-            margin-top: 25px;
-            font-size: 22px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: #a0dfff; /* Нежно-голубой для отсчета */
-            text-shadow: 0 0 8px #6ac0f0; /* Голубое свечение */
-            font-family: 'Playfair Display', serif;
-        }
+    .photo-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-        /* Контентные секции - прозрачные, с мягким свечением и тенью */
-        .content-section {
-            padding: 70px 20px 90px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease, transform 1s ease;
-            max-width: 1000px;
-            margin: 40px auto; /* Добавил отступ сверху для разделения */
-            background: rgba(255, 255, 255, 0.05); /* Очень легкая прозрачная заливка */
-            border-radius: 20px; /* Скругленные углы */
-            box-shadow: 0 0 25px rgba(100, 200, 255, 0.1), 0 0 10px rgba(255, 182, 193, 0.05); /* Голубоватое свечение + легкая розовая тень */
-            border: 1px solid rgba(255, 255, 255, 0.08); /* Тонкая, едва заметная рамка */
-        }
+    .photo-gallery img {
+      width: 300px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
 
-        .content-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .photo-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    }
 
-        .content-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            margin-bottom: 30px;
-            color: #a0dfff; /* Свежий голубой для заголовков секций */
-            text-shadow: 0 0 6px #6ac0f0; /* Голубое свечение */
-        }
+    .hotel-section img {
+      max-width: 90%;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
 
-        /* Галерея фото */
-        .photo-gallery {
-            display: flex;
-            justify-content: center;
-            gap: 25px; /* Увеличил отступ между фото */
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+    form {
+      max-width: 500px;
+      margin: 0 auto 50px;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 2s ease-in-out;
+    }
 
-        .photo-gallery img {
-            width: 280px;
-            height: auto;
-            border-radius: 14px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(160, 223, 255, 0.5); /* Темная тень + голубоватое свечение */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            border: 2px solid rgba(160, 223, 255, 0.3); /* Тонкая голубоватая рамка */
-        }
+    form h2 {
+      margin-bottom: 20px;
+    }
 
-        .photo-gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(160, 223, 255, 0.8);
-        }
+    form input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
 
-        /* Секция отеля */
-        .hotel-section p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto 20px;
-            font-weight: 500;
-            color: #c0e0ff; /* Более светлый голубой для текста */
-            text-shadow: 0 0 5px rgba(106, 192, 240, 0.5);
-        }
+    .radio-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
 
-        .hotel-section img {
-            max-width: 100%;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(160, 223, 255, 0.7); /* Темная тень + голубоватое свечение */
-            margin-top: 1rem;
-            transition: transform 0.4s ease;
-            cursor: pointer;
-            border: 2px solid rgba(160, 223, 255, 0.4);
-        }
+    .radio-group label {
+      display: block;
+      margin-bottom: 10px;
+    }
 
-        .hotel-section img:hover {
-            transform: scale(1.03);
-        }
+    form input[type="submit"] {
+      background-color: #ffc9de;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #000;
+    }
 
-        /* Форма RSVP - более сдержанный дизайн */
-        form {
-            padding: 70px 20px 90px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.07); /* Ещё более прозрачный фон */
-            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Мягкий разделитель */
-            max-width: 500px;
-            margin: 60px auto;
-            border-radius: 16px;
-            box-shadow: 0 0 30px rgba(160, 223, 255, 0.15), 0 0 10px rgba(255, 111, 163, 0.05); /* Смесь голубого и легкого розового */
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      background-color: rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-        form h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            margin-bottom: 25px;
-            color: #a0dfff; /* Голубой заголовок формы */
-            text-shadow: 0 0 8px #6ac0f0;
-        }
+    audio {
+      display: none;
+    }
 
-        form input[type="text"] {
-            padding: 14px;
-            font-size: 18px;
-            width: 280px;
-            margin: 12px 0;
-            border-radius: 8px;
-            border: none;
-            outline: none;
-            box-shadow: 0 0 8px rgba(160, 223, 255, 0.4) inset; /* Голубая внутренняя тень */
-            background: rgba(255, 255, 255, 0.1); /* Темнее и прозрачнее */
-            color: #fff;
-            transition: box-shadow 0.3s ease, background 0.3s ease;
-        }
+    @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
 
-        form input[type="text"]:focus {
-            box-shadow: 0 0 12px rgba(160, 223, 255, 0.6) inset;
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .radio-group {
-            margin: 20px 0 30px;
-            font-size: 18px;
-            font-weight: 500;
-            color: #c0e0ff; /* Голубоватый текст для радио-кнопок */
-        }
-
-        .radio-group label {
-            margin: 0 15px;
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.3s ease;
-        }
-
-        .radio-group input[type="radio"] {
-            margin-right: 8px;
-            cursor: pointer;
-            accent-color: #ff6fa3; /* Розовый акцент для радио-кнопок */
-        }
-
-        .radio-group label:hover {
-            color: #a0dfff; /* Голубой при наведении */
-        }
-
-        form input[type="submit"] {
-            padding: 14px 36px;
-            background: linear-gradient(45deg, #ff6fa3, #ff9ec4); /* Розовая кнопка */
-            color: #fff;
-            border: none;
-            font-weight: 700;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 0 15px rgba(255, 111, 163, 0.6); /* Розовое свечение */
-        }
-
-        form input[type="submit"]:hover {
-            background: linear-gradient(45deg, #ff9ec4, #ff6fa3); /* Смена градиента при наведении */
-            box-shadow: 0 0 25px rgba(255, 111, 163, 0.8);
-        }
-
-        /* Футер - более мягкие цвета */
-        footer {
-            text-align: center;
-            padding: 25px 20px;
-            background: rgba(255, 255, 255, 0.05); /* Очень легкая прозрачность */
-            font-size: 15px;
-            color: #c0e0ff; /* Голубоватый текст */
-            font-weight: 500;
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
-            margin-top: auto;
-        }
-
-        /* Мобильная адаптивность */
-        @media (max-width: 600px) {
-            .names-heading {
-                font-size: 48px;
-            }
-            .content-section h2 {
-                font-size: 28px;
-            }
-            form input[type="text"] {
-                width: 90%;
-            }
-            .photo-gallery img {
-                width: 90vw;
-                max-width: 300px;
-            }
-        }
-    </style>
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+  </style>
 </head>
 <body>
-    <div class="stars-background" id="starsBackground"></div>
+  <div class="stars-background"></div>
 
-    <header>
-        <h1 class="names-heading">Еркежан <span>&</span> Бекзат</h1>
-        <p class="header-info">Мы приглашаем вас отпраздновать начало нашей вечности вместе</p>
-        <p class="invitation-text">Пусть этот день станет началом самой красивой сказки в нашей жизни. Ждём вас с любовью и радостью!</p>
-        <div class="countdown" id="countdown"></div>
-    </header>
+  <!-- Фоновая музыка -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_54f3fb041e.mp3?filename=wedding-dreams-121275.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-    <section class="content-section">
-        <h2>Наша история</h2>
-        <div class="photo-gallery">
-            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&q=80&w=1974" alt="Пара 1" />
-            <img src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&q=80&w=1974" alt="Пара 2" />
-            <img src="https://images.unsplash.com/photo-1530023367847-a683933f4175?auto=format&fit=crop&q=80&w=1974" alt="Пара 3" />
-        </div>
-    </section>
+  <header>
+    <h1 class="names-heading">Айдана <span>&</span> Рустам</h1>
+    <p class="header-info">Приглашаем вас на нашу свадьбу!</p>
+    <p class="invitation-text">20 июля 2025 года в 18:00 | Ресторан "Luxury Palace"</p>
+    <div class="countdown" id="countdown">Загрузка...</div>
+  </header>
 
-    <section class="content-section hotel-section">
-        <h2>Торжество</h2>
-        <p>Церемония и банкет пройдут в самом сердце столицы — отеле <strong>Hilton Hotel, Астана</strong>.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Hilton_Astana.jpg/800px-Hilton_Astana.jpg" alt="Hilton Astana Hotel" />
-    </section>
+  <section class="content-section">
+    <h2>Немного о нас</h2>
+    <div class="photo-gallery">
+      <img src="https://via.placeholder.com/300x400?text=Айдана" alt="Айдана">
+      <img src="https://via.placeholder.com/300x400?text=Рустам" alt="Рустам">
+    </div>
+  </section>
 
+  <section class="content-section hotel-section">
+    <h2>Место проведения</h2>
+    <p>Ресторан "Luxury Palace", ул. Торайгырова, 5, г. Астана</p>
+    <img src="https://via.placeholder.com/600x300?text=Ресторан+Luxury+Palace" alt="Ресторан">
+  </section>
+
+  <section class="content-section">
     <form id="rsvp-form">
-        <h2>Вы с нами?</h2>
-        <input type="text" placeholder="Ваше имя" name="name" required />
-        <div class="radio-group">
-            <label><input type="radio" name="attendance" value="yes" required /> Приду</label>
-            <label><input type="radio" name="attendance" value="no" /> Не смогу</label>
-        </div>
-        <input type="submit" value="Отправить приглашение" />
+      <h2>Подтвердите участие</h2>
+      <input type="text" id="name" placeholder="Ваше имя" required />
+      <div class="radio-group">
+        <label><input type="radio" name="attendance" value="yes" required /> Да, я приду!</label>
+        <label><input type="radio" name="attendance" value="no" /> Увы, не смогу прийти</label>
+      </div>
+      <input type="submit" value="Отправить" />
     </form>
+  </section>
 
-    <footer>
-        &copy; 2031 Еркежан и Бекзат. Все права защищены.
-    </footer>
+  <footer>
+    С любовью, Еркежан и Бекзат 💕
+  </footer>
 
-    <script>
-        // Звёздный фон
-        const starsBackground = document.getElementById('starsBackground');
-        for (let i = 0; i < 200; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = star.style.height = `${Math.random() * 2 + 1}px`;
-            star.style.left = `${Math.random() * 100}vw`;
-            star.style.top = `${Math.random() * 100}vh`;
-            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-            star.style.animationDelay = `${Math.random() * 5}s`;
-            starsBackground.appendChild(star);
+  <script>
+    // Таймер обратного отсчёта
+    document.addEventListener('DOMContentLoaded', function () {
+      const countdown = document.getElementById('countdown');
+      const weddingDate = new Date('2025-07-20T18:00:00');
+
+      function updateCountdown() {
+        const now = new Date();
+        const timeDiff = weddingDate - now;
+
+        if (timeDiff <= 0) {
+          countdown.innerText = 'Свадьба уже началась!';
+          return;
         }
 
-        // Обновленная дата свадьбы: 30 марта 2031 года
-        const countdownEl = document.getElementById("countdown");
-        const weddingDate = new Date("2031-03-30T00:00:00").getTime();
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+        const seconds = Math.floor((timeDiff / 1000) % 60);
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
+        countdown.innerText = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+      }
 
-            if (distance <= 0) {
-                countdownEl.innerHTML = "Свадьба уже началась!";
-                clearInterval(countdownInterval);
-                return;
-            }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      // RSVP
+      const form = document.getElementById('rsvp-form');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const attending = document.querySelector('input[name="attendance"]:checked');
 
-            countdownEl.innerHTML = `Осталось: ${days}д ${hours}ч ${minutes}м ${seconds}с`;
+        if (!attending) {
+          alert('Пожалуйста, выберите вариант участия.');
+          return;
         }
 
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
+        alert(`Спасибо, ${name}! Ответ принят: ${attending.value === 'yes' ? 'Вы придёте!' : 'Вы не сможете прийти.'}`);
+        form.reset();
+      });
 
-        // Плавное появление секций при скролле
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.content-section, form, footer').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Обработка формы (пример, можно расширить)
-        const form = document.getElementById('rsvp-form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = form.name.value.trim();
-            const attendance = form.attendance.value;
-
-            if (!name || !attendance) {
-                alert('Пожалуйста, заполните все поля.');
-                return;
-            }
-
-            alert(`Спасибо, ${name}! Ваш ответ: ${attendance === 'yes' ? 'Приду' : 'Не смогу'}. Мы вас ждем!`);
-            form.reset();
-        });
-    </script>
+      // Автозапуск музыки на первый клик (нужно из-за политики браузеров)
+      document.body.addEventListener('click', () => {
+        const audio = document.getElementById('bg-music');
+        if (audio.paused) audio.play();
+      }, { once: true });
+    });
+  </script>
 </body>
 </html>
