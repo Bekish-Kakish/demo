@@ -6,10 +6,7 @@
   <title>Еркежан & Бекзат</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
@@ -18,7 +15,6 @@
       overflow-x: hidden;
       position: relative;
     }
-
     .stars {
       position: fixed;
       width: 100%;
@@ -26,7 +22,6 @@
       background: transparent;
       z-index: 0;
     }
-
     .stars::after {
       content: '';
       position: absolute;
@@ -36,23 +31,16 @@
       animation: twinkling 200s linear infinite;
       opacity: 0.6;
     }
-
     @keyframes twinkling {
-      from {background-position: 0 0;}
-      to {background-position: -10000px 5000px;}
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
     }
-
     header, .content-section, footer {
       position: relative;
       z-index: 1;
       animation: fadeIn 2s ease-in-out;
     }
-
-    header {
-      text-align: center;
-      padding: 60px 20px 40px;
-    }
-
+    header { text-align: center; padding: 60px 20px 40px; }
     .names-heading {
       font-family: 'Great Vibes', cursive;
       font-size: 4rem;
@@ -60,56 +48,37 @@
       color: #ffc9de;
       text-shadow: 0 0 20px rgba(255,255,255,0.4);
     }
-
     .names-heading span {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       color: #fff;
     }
-
-    .header-info {
-      font-size: 1.3rem;
-      color: #ddd;
-      margin-bottom: 10px;
-    }
-
-    .invitation-text {
-      font-size: 1.1rem;
-      margin-bottom: 20px;
-    }
-
+    .header-info { font-size: 1.3rem; color: #ddd; margin-bottom: 10px; }
+    .invitation-text { font-size: 1.1rem; margin-bottom: 20px; }
     .countdown {
       font-size: 1.6rem;
       font-weight: 600;
       color: #ffc9de;
     }
-
     .tagline {
       font-style: italic;
       margin-top: 20px;
       font-size: 1.2rem;
       opacity: 0.8;
     }
-
-    .content-section {
-      padding: 40px 20px;
-      text-align: center;
-    }
-
+    .content-section { padding: 40px 20px; text-align: center; }
     .content-section h2 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
       margin-bottom: 20px;
       color: #fff;
     }
-
     .photo-gallery {
       display: flex;
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
     }
-
     .photo-gallery img {
       width: 300px;
       height: 400px;
@@ -118,18 +87,13 @@
       box-shadow: 0 0 15px rgba(255,255,255,0.3);
       transition: transform 0.4s ease;
     }
-
-    .photo-gallery img:hover {
-      transform: scale(1.05);
-    }
-
+    .photo-gallery img:hover { transform: scale(1.05); }
     .hotel-section img {
       max-width: 90%;
       border-radius: 20px;
       margin-top: 20px;
       box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
-
     form {
       max-width: 500px;
       margin: 0 auto 50px;
@@ -138,11 +102,7 @@
       background-color: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(6px);
     }
-
-    form h2 {
-      margin-bottom: 20px;
-    }
-
+    form h2 { margin-bottom: 20px; }
     form input[type="text"] {
       width: 100%;
       padding: 10px;
@@ -150,17 +110,13 @@
       border-radius: 10px;
       margin-bottom: 15px;
     }
-
-    .radio-group {
-      margin-bottom: 15px;
-      text-align: left;
-    }
-
+    .radio-group { margin-bottom: 15px; text-align: left; }
     .radio-group label {
       display: block;
       margin-bottom: 10px;
+      cursor: pointer;
     }
-
+    form input[type="radio"] { margin-right: 8px; }
     form input[type="submit"] {
       background-color: #ffc9de;
       border: none;
@@ -170,7 +126,6 @@
       font-weight: bold;
       color: #000;
     }
-
     footer {
       text-align: center;
       padding: 30px 10px;
@@ -178,14 +133,10 @@
       font-size: 1rem;
       color: #ccc;
     }
-
-    audio {
-      display: none;
-    }
-
+    audio { display: none; }
     @keyframes fadeIn {
-      0% {opacity: 0;}
-      100% {opacity: 1;}
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
   </style>
 </head>
@@ -199,7 +150,7 @@
   <header>
     <h1 class="names-heading">Еркежан <span>&</span> Бекзат</h1>
     <p class="header-info">Приглашаем вас на нашу свадьбу!</p>
-    <p class="invitation-text">20 июля 2025 года в 18:00 | Ресторан "Luxury Palace"</p>
+    <p class="invitation-text">30 марта 2031 года в 16:00 | Hilton Astana</p>
     <div class="countdown" id="countdown">Загрузка...</div>
     <p class="tagline">История любви, написанная звездами ✨</p>
   </header>
@@ -207,15 +158,15 @@
   <section class="content-section">
     <h2>Немного о нас</h2>
     <div class="photo-gallery">
-      <img src="https://via.placeholder.com/300x400?text=Еркежан" alt="Еркежан">
-      <img src="https://via.placeholder.com/300x400?text=Бекзат" alt="Бекзат">
+      <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&q=80" alt="Еркежан и Бекзат">
+      <img src="https://images.unsplash.com/photo-1516685304081-de7947d419d3?auto=format&fit=crop&q=80" alt="Еркежан и Бекзат">
     </div>
   </section>
 
   <section class="content-section hotel-section">
     <h2>Место проведения</h2>
-    <p>Ресторан "Luxury Palace", ул. Торайгырова, 5, г. Астана</p>
-    <img src="https://via.placeholder.com/600x300?text=Ресторан+Luxury+Palace" alt="Ресторан">
+    <p>Hilton Astana, Ул. Гейдара Алиева, 14</p>
+    <img src="https://images.unsplash.com/photo-1550899232-a51645e2e201?auto=format&fit=crop&q=80" alt="Hilton Astana">
   </section>
 
   <section class="content-section">
@@ -237,41 +188,27 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const countdown = document.getElementById('countdown');
-      const weddingDate = new Date('2025-07-20T18:00:00');
-
+      const weddingDate = new Date('2031-03-30T16:00:00');
       function updateCountdown() {
         const now = new Date();
-        const timeDiff = weddingDate - now;
-
-        if (timeDiff <= 0) {
-          countdown.innerText = 'Свадьба уже началась!';
-          return;
-        }
-
-        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
-        const seconds = Math.floor((timeDiff / 1000) % 60);
-
-        countdown.innerText = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+        const diff = weddingDate - now;
+        if (diff <= 0) { countdown.innerText = 'Свадьба началась!'; return; }
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        countdown.innerText = `${d}д ${h}ч ${m}м ${s}с`;
       }
-
       updateCountdown();
       setInterval(updateCountdown, 1000);
 
-      const form = document.getElementById('rsvp-form');
-      form.addEventListener('submit', function (e) {
+      document.getElementById('rsvp-form').addEventListener('submit', e => {
         e.preventDefault();
         const name = document.getElementById('name').value;
-        const attending = document.querySelector('input[name="attendance"]:checked');
-
-        if (!attending) {
-          alert('Пожалуйста, выберите вариант участия.');
-          return;
-        }
-
-        alert(`Спасибо, ${name}! Ответ принят: ${attending.value === 'yes' ? 'Вы придёте!' : 'Вы не сможете прийти.'}`);
-        form.reset();
+        const attend = document.querySelector('input[name="attendance"]:checked');
+        if (!attend) { alert('Выберите участие.'); return; }
+        alert(`Спасибо, ${name}! Мы ${attend.value === 'yes' ? 'ждем вас!' : 'сожалеем!'}`);
+        e.target.reset();
       });
 
       document.body.addEventListener('click', () => {
