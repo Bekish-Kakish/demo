@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Приглашение на свадьбу</title>
+  <title>Еркежан & Бекзат</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -13,37 +13,36 @@
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      background: #000;
       color: #fff;
       overflow-x: hidden;
+      position: relative;
     }
 
-    .stars-background {
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: radial-gradient(white 1px, transparent 1px),
-                        radial-gradient(white 1px, transparent 1px);
-      background-size: 50px 50px;
-      opacity: 0.15;
       z-index: 0;
     }
 
-    header {
-      text-align: center;
-      padding: 50px 20px 30px;
+    header, .content-section, footer {
       position: relative;
       z-index: 1;
       animation: fadeIn 2s ease-in-out;
     }
 
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
     .names-heading {
       font-family: 'Great Vibes', cursive;
-      font-size: 3.5rem;
+      font-size: 4rem;
       margin-bottom: 10px;
       color: #ffc9de;
+      text-shadow: 0 0 20px rgba(255,255,255,0.4);
     }
 
     .names-heading span {
@@ -52,32 +51,40 @@
       color: #fff;
     }
 
-    .header-info, .invitation-text {
-      font-size: 1.2rem;
+    .header-info {
+      font-size: 1.3rem;
       color: #ddd;
-      margin-bottom: 15px;
-      animation: fadeInUp 2s ease-in-out;
+      margin-bottom: 10px;
+    }
+
+    .invitation-text {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
     }
 
     .countdown {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 600;
       color: #ffc9de;
-      animation: fadeIn 2s ease-in-out;
+    }
+
+    .tagline {
+      font-style: italic;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      opacity: 0.8;
     }
 
     .content-section {
       padding: 40px 20px;
       text-align: center;
-      position: relative;
-      z-index: 1;
-      animation: fadeInUp 1.5s ease-in-out;
     }
 
     .content-section h2 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
       margin-bottom: 20px;
+      color: #fff;
     }
 
     .photo-gallery {
@@ -92,19 +99,19 @@
       height: 400px;
       object-fit: cover;
       border-radius: 20px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      transition: transform 0.4s ease;
     }
 
     .photo-gallery img:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255,255,255,0.3);
     }
 
     .hotel-section img {
       max-width: 90%;
       border-radius: 20px;
       margin-top: 20px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
 
     form {
@@ -112,11 +119,8 @@
       margin: 0 auto 50px;
       padding: 20px;
       border-radius: 15px;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(6px);
-      position: relative;
-      z-index: 1;
-      animation: fadeInUp 2s ease-in-out;
     }
 
     form h2 {
@@ -156,7 +160,7 @@
       padding: 30px 10px;
       background-color: rgba(255, 255, 255, 0.05);
       font-size: 1rem;
-      animation: fadeIn 2s ease-in-out;
+      color: #ccc;
     }
 
     audio {
@@ -167,34 +171,28 @@
       0% {opacity: 0;}
       100% {opacity: 1;}
     }
-
-    @keyframes fadeInUp {
-      0% {opacity: 0; transform: translateY(20px);}
-      100% {opacity: 1; transform: translateY(0);}
-    }
   </style>
 </head>
 <body>
-  <div class="stars-background"></div>
+  <canvas id="stars"></canvas>
 
-  <!-- Фоновая музыка -->
   <audio id="bg-music" autoplay loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_54f3fb041e.mp3?filename=wedding-dreams-121275.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
   </audio>
 
   <header>
-    <h1 class="names-heading">Айдана <span>&</span> Рустам</h1>
+    <h1 class="names-heading">Еркежан <span>&</span> Бекзат</h1>
     <p class="header-info">Приглашаем вас на нашу свадьбу!</p>
     <p class="invitation-text">20 июля 2025 года в 18:00 | Ресторан "Luxury Palace"</p>
     <div class="countdown" id="countdown">Загрузка...</div>
+    <p class="tagline">История любви, написанная звездами ✨</p>
   </header>
 
   <section class="content-section">
     <h2>Немного о нас</h2>
     <div class="photo-gallery">
-      <img src="https://via.placeholder.com/300x400?text=Айдана" alt="Айдана">
-      <img src="https://via.placeholder.com/300x400?text=Рустам" alt="Рустам">
+      <img src="https://via.placeholder.com/300x400?text=Еркежан" alt="Еркежан">
+      <img src="https://via.placeholder.com/300x400?text=Бекзат" alt="Бекзат">
     </div>
   </section>
 
@@ -221,7 +219,7 @@
   </footer>
 
   <script>
-    // Таймер обратного отсчёта
+    // Обратный отсчёт
     document.addEventListener('DOMContentLoaded', function () {
       const countdown = document.getElementById('countdown');
       const weddingDate = new Date('2025-07-20T18:00:00');
@@ -262,12 +260,72 @@
         form.reset();
       });
 
-      // Автозапуск музыки на первый клик (нужно из-за политики браузеров)
+      // Музыка запускается при первом клике
       document.body.addEventListener('click', () => {
         const audio = document.getElementById('bg-music');
         if (audio.paused) audio.play();
       }, { once: true });
     });
+
+    // Анимированные звёзды
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let width, height, stars = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    function createStars(count) {
+      stars = [];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 1.5 + 0.5,
+          dx: (Math.random() - 0.5) * 0.5,
+          dy: (Math.random() - 0.5) * 0.5,
+          opacity: Math.random()
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#ffffff";
+      stars.forEach(star => {
+        ctx.globalAlpha = star.opacity;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function updateStars() {
+      stars.forEach(star => {
+        star.x += star.dx;
+        star.y += star.dy;
+        if (star.x < 0 || star.x > width) star.dx *= -1;
+        if (star.y < 0 || star.y > height) star.dy *= -1;
+        star.opacity = 0.5 + Math.sin(Date.now() * 0.002 + star.x) * 0.5;
+      });
+    }
+
+    function animate() {
+      drawStars();
+      updateStars();
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      createStars(200);
+    });
+
+    resize();
+    createStars(200);
+    animate();
   </script>
 </body>
 </html>
