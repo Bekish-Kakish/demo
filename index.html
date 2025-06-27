@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Еркежан & Бекзат</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body {
@@ -14,26 +14,32 @@
       color: #fff;
       overflow-x: hidden;
       position: relative;
+      min-height: 100vh;
     }
+    /* Контейнер для звезд */
     .stars {
       position: fixed;
-      width: 100%;
-      height: 100%;
-      background: transparent;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      pointer-events: none;
       z-index: 0;
+      overflow: hidden;
+      background: transparent;
     }
-    .stars::after {
-      content: '';
+    /* Звезда */
+    .star {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url('https://i.ibb.co/vkDbWnG/stars.png') repeat;
-      animation: twinkling 200s linear infinite;
-      opacity: 0.6;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle infinite alternate;
+      box-shadow: 0 0 6px 2px white;
     }
-    @keyframes twinkling {
-      from { background-position: 0 0; }
-      to { background-position: -10000px 5000px; }
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
     }
     header, .content-section, footer {
       position: relative;
@@ -101,6 +107,7 @@
       border-radius: 15px;
       background-color: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(6px);
+      color: #fff;
     }
     form h2 { margin-bottom: 20px; }
     form input[type="text"] {
@@ -109,12 +116,15 @@
       border: none;
       border-radius: 10px;
       margin-bottom: 15px;
+      font-size: 1rem;
+      outline: none;
     }
     .radio-group { margin-bottom: 15px; text-align: left; }
     .radio-group label {
       display: block;
       margin-bottom: 10px;
       cursor: pointer;
+      font-size: 1rem;
     }
     form input[type="radio"] { margin-right: 8px; }
     form input[type="submit"] {
@@ -125,6 +135,11 @@
       cursor: pointer;
       font-weight: bold;
       color: #000;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    form input[type="submit"]:hover {
+      background-color: #ffb0d1;
     }
     footer {
       text-align: center;
@@ -132,6 +147,8 @@
       background-color: rgba(255, 255, 255, 0.05);
       font-size: 1rem;
       color: #ccc;
+      position: relative;
+      z-index: 1;
     }
     audio { display: none; }
     @keyframes fadeIn {
@@ -141,10 +158,10 @@
   </style>
 </head>
 <body>
-  <div class="stars"></div>
+  <div class="stars" id="stars"></div>
 
   <audio id="bg-music" autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_54f3fb041e.mp3?filename=wedding-dreams-121275.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_54f3fb041e.mp3?filename=wedding-dreams-121275.mp3" type="audio/mpeg" />
   </audio>
 
   <header>
@@ -158,15 +175,15 @@
   <section class="content-section">
     <h2>Немного о нас</h2>
     <div class="photo-gallery">
-      <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&q=80" alt="Еркежан и Бекзат">
-      <img src="https://images.unsplash.com/photo-1516685304081-de7947d419d3?auto=format&fit=crop&q=80" alt="Еркежан и Бекзат">
+      <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&q=80" alt="Еркежан и Бекзат" />
+      <img src="https://images.unsplash.com/photo-1516685304081-de7947d419d3?auto=format&fit=crop&q=80" alt="Еркежан и Бекзат" />
     </div>
   </section>
 
   <section class="content-section hotel-section">
     <h2>Место проведения</h2>
     <p>Hilton Astana, Ул. Гейдара Алиева, 14</p>
-    <img src="https://images.unsplash.com/photo-1550899232-a51645e2e201?auto=format&fit=crop&q=80" alt="Hilton Astana">
+    <img src="https://images.unsplash.com/photo-1550899232-a51645e2e201?auto=format&fit=crop&q=80" alt="Hilton Astana" />
   </section>
 
   <section class="content-section">
@@ -186,36 +203,67 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const countdown = document.getElementById('countdown');
-      const weddingDate = new Date('2031-03-30T16:00:00');
-      function updateCountdown() {
-        const now = new Date();
-        const diff = weddingDate - now;
-        if (diff <= 0) { countdown.innerText = 'Свадьба началась!'; return; }
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / (1000 * 60)) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-        countdown.innerText = `${d}д ${h}ч ${m}м ${s}с`;
+    // Создаем звезды динамически
+    const starsContainer = document.getElementById('stars');
+    const starCount = 150;
+
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      const size = Math.random() * 2 + 1; // от 1 до 3 px
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      star.style.animationDelay = (Math.random() * 5) + 's';
+      star.style.opacity = Math.random() * 0.5 + 0.5;
+      starsContainer.appendChild(star);
+    }
+
+    // Обновление таймера обратного отсчёта
+    const countdown = document.getElementById('countdown');
+    const weddingDate = new Date('2031-03-30T16:00:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = weddingDate - now;
+      if (diff <= 0) {
+        countdown.innerText = 'Свадьба началась!';
+        clearInterval(intervalId);
+        return;
       }
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      countdown.innerText = `${d}д ${h}ч ${m}м ${s}с`;
+    }
+    updateCountdown();
+    const intervalId = setInterval(updateCountdown, 1000);
 
-      document.getElementById('rsvp-form').addEventListener('submit', e => {
-        e.preventDefault();
-        const name = document.getElementById('name').value;
-        const attend = document.querySelector('input[name="attendance"]:checked');
-        if (!attend) { alert('Выберите участие.'); return; }
-        alert(`Спасибо, ${name}! Мы ${attend.value === 'yes' ? 'ждем вас!' : 'сожалеем!'}`);
-        e.target.reset();
-      });
-
-      document.body.addEventListener('click', () => {
-        const audio = document.getElementById('bg-music');
-        if (audio.paused) audio.play();
-      }, { once: true });
+    // Обработка формы RSVP
+    document.getElementById('rsvp-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const attend = document.querySelector('input[name="attendance"]:checked');
+      if (!attend) {
+        alert('Пожалуйста, выберите участие.');
+        return;
+      }
+      if (!name) {
+        alert('Пожалуйста, введите ваше имя.');
+        return;
+      }
+      alert(`Спасибо, ${name}! Мы ${attend.value === 'yes' ? 'ждем вас!' : 'сожалеем, что вы не сможете прийти.'}`);
+      e.target.reset();
     });
+
+    // Включение музыки по клику (автоплей может блокироваться)
+    document.body.addEventListener('click', () => {
+      const audio = document.getElementById('bg-music');
+      if (audio.paused) audio.play();
+    }, { once: true });
   </script>
 </body>
 </html>
